@@ -1,0 +1,8 @@
+CREATE TABLE user (
+  id INT NOT NULL AUTO_INCREMENT,
+  studentID INT NOT NULL,
+  username VARCHAR(30) NULL,
+  password VARCHAR(255) NULL,
+  email VARCHAR(50) NULL,
+  PRIMARY KEY (id)
+);
