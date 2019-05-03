@@ -7,11 +7,12 @@ module.exports = function (server) {
         if (request.session.username) {
             response.send(`환영합니다. ${request.session.username} 씨`);
         } else {
-            response.send('로그인 해주세요');
+            response.redirect('/login');
+            //response.send('로그인 해주세요');
         }
     });
 
     server.get('/login', (request, response) => {
-        response.sendFile('public/login_test.html', {root: __dirname + '/../' });
+        response.sendFile('public/login.html', {root: __dirname + '/../' });
     });
 }
