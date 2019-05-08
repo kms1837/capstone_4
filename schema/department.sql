@@ -1,0 +1,5 @@
+CREATE TABLE department (
+  id INT NOT NULL AUTO_INCREMENT,
+  univID INT NOT NULL,
+  name VARCHAR(30) NULL
+);

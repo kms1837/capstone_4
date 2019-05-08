@@ -4,6 +4,7 @@
 ## 프로젝트세팅
 
 ``` sh
+$ cs ./server/
 $ npm install
 $ npm run init
 => server/config/index.js 수정
