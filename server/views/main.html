@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Purple Admin</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/public/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="/public/vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="/public/css/style.css">
+  <link rel="shortcut icon" href="/public/images/favicon.png" />
+  <style>
+    .progress-wrapper {
+      margin-bottom: 10px;
+    }
+    .progress {
+      height: 25px;
+    }
+    .profile {
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+    .profile .faceimg {
+      border-radius: 100%;
+      width: 50%;
+      margin-bottom: 10px;
+    }
+
+    .sub-navbar-wrapper {
+      height: 50px;
+    }
+
+    .sub-navbar {
+      background: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1;
+      
+      text-align: center;
+      box-shadow: 0px 0px 10px gainsboro;
+    }
+
+    .nav-items {
+      display: inline-block;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .nav-items li {
+      display: inline-block;
+      padding: 10px 20px;
+    }
+
+    .nav-items li:hover {
+      background: #ccc;
+    }
+
+    .nav-items li a:hover {
+      text-decoration: none;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper">
+        <div class="sub-navbar-wrapper">
+          <div class="sub-navbar">
+            <ul class="nav-items">
+              <li>
+                <a href="#">트랙1</a>
+              </li>
+              <li>
+                <a href="#">트랙2</a>
+              </li>
+              <li>
+                <a href="#">트랙3</a>
+              </li>
+              <li>
+                <a href="#">트랙4</a>
+              </li>
+              <li>
+                <a href="#">트랙5</a>
+              </li>
+              <li>
+                <a href="#">트랙6</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="profile text-center">
+                    <img src="/public/images/faces/face1.jpg" class="faceimg" alt="image">
+                    <h1>홍길동</h1>
+                  </div>
+
+                  <div class="progress-wrapper">
+                    <h4 class="card-title">인공지능</h4>
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+
+                  <div class="progress-wrapper">
+                    <h4 class="card-title">빅데이터</h4>
+                    <div class="progress">
+                      <div class="progress-bar bg-gradient-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+
+                  <div class="progress-wrapper">
+                    <h4 class="card-title">카테고리3</h4>
+                    <div class="progress">
+                      <div class="progress-bar bg-gradient-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+
+                  <div class="progress-wrapper">
+                    <h4 class="card-title">카테고리4</h4>
+                    <div class="progress">
+                      <div class="progress-bar bg-gradient-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer bg-gradient-danger card-img-holder text-white">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <h1>Challenger</h1>
+                      <h5 class="card-text">500 sw</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <img src="/public/images/faces/face1.jpg" class="asd" alt="image">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                      <canvas id="raderChart" style="height:230px"></canvas>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/public/vendors/js/vendor.bundle.base.js"></script>
+  <script src="/public/vendors/js/vendor.bundle.addons.js"></script>
+  <script src="/public/js/off-canvas.js"></script>
+  <script src="/public/js/misc.js"></script>
+
+  <script>
+    var ctx = document.getElementById('raderChart').getContext('2d');
+    var options = {
+      scale: {
+        pointLabels: {
+          fontSize: 20,
+          fontStyle: '300',
+          fontColor: 'rgba(0, 0, 0, 1)',
+          fontFamily: "맑은 고딕, sans-serif"
+        },
+        ticks: { 
+          beginAtZero: true,
+          maxTicksLimit: 2,
+          min: 0,
+          max: 10
+        }
+      }
+    };
+
+    var myChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ['코딩 개발', '수학', '팀플', '총학점', '스펙'],
+            datasets: [
+            {
+                label: '점수',
+                data: [8, 6, 4, 6, 4],
+                backgroundColor: 'rgba(255, 99, 132, 1)',
+                borderColor: 'rgba(255, 99, 0, 1)',
+                fill: 1
+            }],
+        },
+        options : options
+    });
+  </script>
+</body>
+
+</html>

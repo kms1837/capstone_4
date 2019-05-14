@@ -7,6 +7,10 @@ router.get('/', (request, response) => {
     userModel.findToStudentID(userData.studentID).then( res => {
         response.json(res);
     });
+});
+
+router.get('/info', (request, response) => {
+    response.sendFile('views/main.html', {root: __dirname + '/../' });
 }); 
 
 router.post('/login', (request, response) => {
