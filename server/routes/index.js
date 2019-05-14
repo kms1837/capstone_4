@@ -1,7 +1,11 @@
 const user = require('./user');
+const school = require('./school');
+const ability = require('./ability');
 
 module.exports = function (server) {
     server.use('/user', user);
+    server.use('/school', school)
+    server.use('/ability', ability);
 
     server.get('/', (request, response) => {
         if (request.session.username) {

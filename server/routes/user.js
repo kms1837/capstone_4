@@ -3,13 +3,16 @@ const userModel = require('../models/user');
 const router = express.Router();
 
 router.get('/', (request, response) => {
-    // 유저정보를 돌려줌
-});
+    let userData = request.body;
+    userModel.findToStudentID(userData.studentID).then( res => {
+        response.json(res);
+    });
+}); 
 
 router.post('/login', (request, response) => {
     let userData = request.body;
-    userModel(userData.studentID).then( res => {
-        if (res.password === userData.password){
+    userModel.findToStudentID(userData.studentID).then( res => {
+        if (res.password === userData.password) {
             request.session.email = res.email;
             request.session.username = res.username;
             response.redirect("/");
