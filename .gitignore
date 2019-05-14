@@ -17,3 +17,6 @@ server/config/index.js
 
 package-lock.json
 *.txt
+
+#service
+uploads/
