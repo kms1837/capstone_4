@@ -9,12 +9,12 @@ var cookieParser = require('cookie-parser');
 var app = express();
 app.use(cookieParser());
 app.engine('html', require('ejs').renderFile);
-app.set('views', './view');
+app.set('views', '../public');
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
-/*
-app.use('/view', express.static(__dirname + '/../../view')); // resource path
-app.use('/uploads', express.static(__dirname + '/../../uploads')); // upload path*/
+
+app.use('/public', express.static(__dirname + '/../public')); // resource path
+app.use('/uploads', express.static(__dirname + '/../uploads')); // upload path
 app.use(bodyParser.json()); // for parsing application/json
 app.use(session(sessionConfig));
 
