@@ -29,9 +29,6 @@ module.exports = {
 }
 `;
 
-makeBaseConfigFile();
-dbInit();
-
 function makeBaseConfigFile() {
     console.log("[설정파일 생성중]");
     try {
@@ -45,31 +42,63 @@ function makeBaseConfigFile() {
     } catch(err) {
         console.log(err);
     }
+
+    console.log('\n');
+}
+
+function makeUploadDir() {
+    console.log("[업로드 폴더 생성중]");
+    try {
+        if (!fs.existsSync('./uploads')) {
+            fs.mkdirSync('./uploads');
+            console.log(`=> make dir uploads`);
+        } else {
+            console.log(`=> 폴더가 이미 존재합니다 생성을 중단합니다.`);
+        }
+    } catch(err) {
+        console.log(err);
+    }
+
+    console.log('\n');
 }
 
 function dbInit() {
-    console.log("[데이터베이스 생성중]");
     const dbconfig = require('./config/index').dbConfig;
     const users = fs.readFileSync('../schema/user.sql').toString();
     const databasePool = mysql.createPool(dbconfig);
-    const newDatabase = async() => {
+    console.log("[데이터베이스 생성중]");
+
+    fs.readdir('../schema/', (err, files) => {
+        files.forEach(file => {
+            let tableSchema = fs.readFileSync(`../schema/${file}`).toString();
+            let tableName = file.split('.')[0];
+            newTable(tableName, tableSchema, databasePool);
+        });
+    });
+}
+
+async function newTable(tableName, tableSchema, databasePool) {
+    
+    console.log(`=> ${tableName} 테이블 생성중`);
+    try {
+        const connection = await databasePool.getConnection(async conn => conn);
         try {
-            const connection = await databasePool.getConnection(async conn => conn);
-            try {
-                await connection.query(users);
-                console.log("=> user 테이블 생성");
-                connection.release();
-            } catch(err) { 
-                console.log(err);
-                console.log("=> user 테이블 생성에러");
-                connection.release();
-                return false;
-            }
-        } catch(err) {
-            console.log('=> db error');
+            await connection.query(tableSchema);
+            console.log(`=> ${tableName} 테이블 생성완료`);
+            connection.release();
+        } catch(err) { 
+            console.log(`=> ${tableName} 테이블 생성에러`);
             console.log(err);
+            connection.release();
             return false;
         }
+    } catch(err) {
+        console.log('=> db error');
+        console.log(err);
+        return false;
     }
-    newDatabase();
 }
+
+makeBaseConfigFile();
+makeUploadDir();
+dbInit();
