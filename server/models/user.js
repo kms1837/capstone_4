@@ -6,5 +6,9 @@ const tableName = 'user';
 module.exports = {
     findToStudentID(studentID) {
         return common.findToOption(tableName, "studentID=?", [studentID]);
+    },
+
+    findToID(id) {
+        return common.findToID(tableName, id);
     }
 };
