@@ -67,6 +67,27 @@ module.exports = {
         }
     },
 
+    async insert(tableName, items={}) {
+        try {
+            const connection = await database.getConnection(async conn=>conn);
+            try {
+                let sql = `INSERT INTO ${tableName} SET ?`;
+                let [rows] = await connection.query(sql, items);
+                connection.release();
+            }
+            catch(err) {
+                await connection.rollback();
+                connection.release();
+                console.log('Query Error!');
+                return false;
+            } 
+        }
+        catch(err) {
+            console.log('DB ERROR!');
+            return false;
+        }
+    },
+
     async delete(tableName, option, ...items) {
         try {
             const connection = await database.getConnection(async conn=>conn);

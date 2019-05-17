@@ -62,23 +62,27 @@ function makeUploadDir() {
     console.log('\n');
 }
 
-function dbInit() {
+async function dbInit() {
     const dbconfig = require('./config/index').dbConfig;
-    const users = fs.readFileSync('../schema/user.sql').toString();
     const databasePool = mysql.createPool(dbconfig);
     console.log("[데이터베이스 생성중]");
 
-    fs.readdir('../schema/', (err, files) => {
+    fs.readdir('../schema/', async(err, files) => {
+        let promisePool = [];
         files.forEach(file => {
             let tableSchema = fs.readFileSync(`../schema/${file}`).toString();
             let tableName = file.split('.')[0];
-            newTable(tableName, tableSchema, databasePool);
+            promisePool.push(newTable(tableName, tableSchema, databasePool));
+        });
+
+        Promise.all(promisePool).then(() => {
+            console.log("=> 모든 테이블 생성 완료");
+            process.exit();
         });
     });
 }
 
 async function newTable(tableName, tableSchema, databasePool) {
-    
     console.log(`=> ${tableName} 테이블 생성중`);
     try {
         const connection = await databasePool.getConnection(async conn => conn);

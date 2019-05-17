@@ -10,7 +10,7 @@ router.get('/', (request, response) => {
 });
 
 router.get('/info', (request, response) => {
-    response.sendFile('views/main.html', {root: __dirname + '/../' });
+    response.render('main');
 }); 
 
 router.post('/login', (request, response) => {

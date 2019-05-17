@@ -1,0 +1,6 @@
+CREATE TABLE file (
+  id INT NOT NULL AUTO_INCREMENT,
+  path VARCHAR(100) NOT NULL,
+  date DATE,
+  PRIMARY KEY (id)
+);
