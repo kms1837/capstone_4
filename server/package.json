@@ -5,13 +5,15 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node app.js",
-    "build": "babel --presets es2015 view/js/es6/ -d view/js/ -w",
+    "server": "nodemon app.js",
+    "build": "babel --presets babel-preset-es2017 public/js_es6 -d public/js/ -w",
     "init": "node init.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2017": "^6.24.1",
     "cookie-parser": "^1.4.4",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
@@ -20,6 +22,7 @@
     "fs": "0.0.1-security",
     "mysql": "^2.16.0",
     "mysql2": "^1.6.5",
+    "nodemon": "^1.19.0",
     "promise-mysql": "^3.3.1"
   },
   "dependencies": {
