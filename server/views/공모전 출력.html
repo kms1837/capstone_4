@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Purple Admin</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="../../vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="shortcut icon" href="../../images/favicon.png" />
+</head>
+
+<body>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper">
+
+          <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">학생 외부 스펙 입력</h4>
+                  <p class="card-description">
+                    <button type="submit" class="btn btn-gradient-primary mr-2" onclick="location.href='자격증.html'">자격증</button>
+                    <button type="submit" class="btn btn-gradient-primary mr-2" onclick="location.href='공모전.html'">공모전</button>
+                    <button type="submit" class="btn btn-gradient-primary mr-2" onclick="location.href='인턴정보.html'">인턴정보</button>
+                    <button type="submit" class="btn btn-gradient-primary mr-2" onclick="location.href='어학연수.html'">어학연수</button>
+                    <button type="submit" class="btn btn-gradient-primary mr-2" onclick="location.href='어학성적.html'">어학성적</button>
+                    <button type="submit" class="btn btn-gradient-primary mr-2" onclick="location.href='교육프로그램.html'">교육프로그램</button>
+
+                  </p>
+                  <form class="forms-sample">
+
+                    <div class="form-group">
+                      <label>File upload</label>
+                      <input type="file" name="img[]" class="file-upload-default">
+                      <div class="input-group col-xs-12">
+                        <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image">
+                        <span class="input-group-append">
+                          <button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleTextarea1">세부사항 설명</label>
+                      <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-gradient-primary mr-2">승인</button>
+                      <button type="button" class="btn btn-Link" data-toggle="modal" data-target="#myModal1" > 거절	</button>
+                       <!-- 모달 팝업 -->
+                        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+                           <div class="modal-dialog">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                   <h4 class="modal-title" id="myModalLabel">거절 사유</h4>
+                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                 </div>
+                                <div class="modal-body">
+                                           <textarea name="name" rows="8" cols="55"></textarea>
+                                 </div>
+                                     <div class="modal-footer">
+                                       <button type="button" class="btn btn-primary">거절사유 보내기</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                                     </div>
+                                  </div>
+                            </div>
+                         </div>
+                    <hr>
+                  </form>
+                  <div class="form-group">
+                    <label for="exampleTextarea1">승인된 목록</label>
+                    <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
+                  </div>
+                  <hr>
+                  <div class="form-group">
+                    <label for="exampleTextarea1">거절된 목록</label>
+                    <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+        </div>
+        </div>
+    </div>
+  </div>
+  <script src="../../vendors/js/vendor.bundle.base.js"></script>
+  <script src="../../vendors/js/vendor.bundle.addons.js"></script>
+  <script src="../../js/off-canvas.js"></script>
+  <script src="../../js/misc.js"></script>
+  <script src="../../js/file-upload.js"></script>
+</body>
+
+</html>
