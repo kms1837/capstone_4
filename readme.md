@@ -5,6 +5,8 @@
 
 ``` sh
 $ cs ./server/
+$ npm install nodemon -g
+$ npm install -g babel-cli
 $ npm install
 $ npm run init
 => server/config/index.js 수정
