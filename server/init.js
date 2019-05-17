@@ -64,7 +64,6 @@ function makeUploadDir() {
 
 async function dbInit() {
     const dbconfig = require('./config/index').dbConfig;
-    const users = fs.readFileSync('../schema/user.sql').toString();
     const databasePool = mysql.createPool(dbconfig);
     console.log("[데이터베이스 생성중]");
 

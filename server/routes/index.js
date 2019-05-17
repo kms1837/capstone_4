@@ -18,6 +18,6 @@ module.exports = function (server) {
     });
 
     server.get('/login', (request, response) => {
-        response.sendFile('public/login.html', {root: __dirname + '/../' });
+        response.render('login');
     });
 }
