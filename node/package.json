@@ -1,0 +1,24 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hello_world.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/insub789/test_1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/insub789/test_1/issues"
+  },
+  "homepage": "https://github.com/insub789/test_1#readme",
+  "dependencies": {
+    "numpy": "0.0.1",
+    "python-shell": "^1.0.7",
+    "save": "^2.3.3"
+  }
+}
