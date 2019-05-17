@@ -4,7 +4,7 @@
 ## 프로젝트세팅
 
 ``` sh
-$ cs ./server/
+$ cd ./server/
 $ npm install nodemon -g
 $ npm install -g babel-cli
 $ npm install
