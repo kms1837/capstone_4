@@ -98,7 +98,7 @@
                 <div class="card-body">
                   <div class="profile text-center">
                     <img src="/public/images/faces/face1.jpg" class="faceimg" alt="image">
-                    <h1>홍길동</h1>
+                    <h1><%= user.username %></h1>
                   </div>
 
                   <div class="progress-wrapper">
@@ -145,7 +145,8 @@
             <div class="col-md-9 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                      <canvas id="raderChart" style="height:230px"></canvas>
+                    <canvas id="raderChart" style="height:230px"></canvas>
+                    <a class="btn btn-success float-right">스펙추가+</a>
                   </div>
                 </div>
               </div>

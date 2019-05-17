@@ -5,10 +5,10 @@
   <title>Purple Admin</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="../../vendors/iconfonts/mdi/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
-  <link rel="stylesheet" href="../../css/style.css">
-  <link rel="shortcut icon" href="../../images/favicon.png" />
+  <link rel="stylesheet" href="/public/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="/public/vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="/public/css/style.css">
+  <link rel="shortcut icon" href="/public/images/favicon.png" />
 </head>
 
 <body>
@@ -43,11 +43,29 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="exampleTextarea1">Textarea</label>
+                      <label for="exampleTextarea1">세부사항 설명</label>
                       <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
-                    <button class="btn btn-light">Cancel</button>
+                    <button type="submit" class="btn btn-gradient-primary mr-2">승인</button>
+                      <button type="button" class="btn btn-Link" data-toggle="modal" data-target="#myModal1" > 거절	</button>
+                       <!-- 모달 팝업 -->
+                        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+                           <div class="modal-dialog">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                   <h4 class="modal-title" id="myModalLabel">거절 사유</h4>
+                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                 </div>
+                                <div class="modal-body">
+                                           <textarea name="name" rows="8" cols="55"></textarea>
+                                 </div>
+                                     <div class="modal-footer">
+                                       <button type="button" class="btn btn-primary">거절사유 보내기</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                                     </div>
+                                  </div>
+                            </div>
+                         </div>
                     <hr>
                   </form>
                   <div class="form-group">
@@ -71,11 +89,11 @@
         </div>
     </div>
   </div>
-  <script src="../../vendors/js/vendor.bundle.base.js"></script>
-  <script src="../../vendors/js/vendor.bundle.addons.js"></script>
-  <script src="../../js/off-canvas.js"></script>
-  <script src="../../js/misc.js"></script>
-  <script src="../../js/file-upload.js"></script>
+  <script src="/public/vendors/js/vendor.bundle.base.js"></script>
+  <script src="/public/vendors/js/vendor.bundle.addons.js"></script>
+  <script src="/public/js/off-canvas.js"></script>
+  <script src="/public/js/misc.js"></script>
+  <script src="/public/js/file-upload.js"></script>
 </body>
 
 </html>
