@@ -1,0 +1,5 @@
+INSERT INTO stu_spec(id,student_id,spec_name,spec_score,regist_agree,spec_explain,certificate,request_date,agree_date) VALUES (1,11111,111,100.0,TRUE,"정보처리기사 자격증 취득","정보처리기사",2019-05-01,2019-05-02);
+INSERT INTO stu_spec(id,student_id,spec_name,spec_score,regist_agree,spec_explain,certificate,request_date,agree_date) VALUES (2,22222,222,200.0,FALSE,"ICT 연계형 인턴쉽","abc",2019-05-01,2019-05-02);
+INSERT INTO stu_spec(id,student_id,spec_name,spec_score,regist_agree,spec_explain,certificate,request_date,agree_date) VALUES (3,33333,333,300.0,FALSE,"해외 어학연수","def",2019-05-01,2019-05-02);
+INSERT INTO stu_spec(id,student_id,spec_name,spec_score,regist_agree,spec_explain,certificate,request_date,agree_date) VALUES (4,44444,444,400.0,TRUE,"토익 성적 취득","900",2019-05-01,2019-05-02);
+INSERT INTO stu_spec(id,student_id,spec_name,spec_score,regist_agree,spec_explain,certificate,request_date,agree_date) VALUES (5,55555,555,500.0,TRUE,"교내 해커톤 대상 1회, 금상 2회","aaaaa",2019-05-01,2019-05-02);
