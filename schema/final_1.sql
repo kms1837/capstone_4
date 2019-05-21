@@ -38,10 +38,15 @@ CREATE TABLE file (
 
 create table final_score(
 	id int not null auto_increment,
-    studentID int not null,
-    final_score double not null,
+    name varchar(20) not null,
+    coding double not null,
+    teample double not null,
+    spec double not null,
+    grade double not null,
+    math double not null,
     final_grade varchar(20) not null,
-    primary key (id, studentID, final_grade)
+    check_date varchar(30) not null,
+    primary key (id, name, final_grade)
 );
 
 create table major_univ (
@@ -55,7 +60,6 @@ create table score (
     majorid int not null,
     score double not null,
     grade varchar(10) not null,
-    learndate date not null,
     primary key(id, studentID, majorid, grade)
 );
 

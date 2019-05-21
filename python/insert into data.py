@@ -66,7 +66,6 @@ def add_subject(majorname, subjectnumber, name, categoryID) :
     conn.commit()
     conn.close()
 
-get_connection()
 k=0
 for i in class_number.index :
     a = class_number['departID'][k]
@@ -96,7 +95,6 @@ def add_subject(subjectnumber, name, categoryID) :
     conn.commit()
     conn.close()
     
-get_connection()
 for i in subject.index :
     a = subject['해당분야'][i]
     a = int(a)
@@ -118,7 +116,6 @@ def add_score(studentID, majorid, score, grade) :
     conn.close()
 
 df = pd.read_csv('C:/Users/User/Desktop/capstone_4/node/data/g.csv')
-get_connection()
 for i in df.index :
     a = subject[subject['subject_name']==df['교과목명'][i]]
     b = a.index.values
