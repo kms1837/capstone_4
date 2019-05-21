@@ -1,5 +1,5 @@
 -- 데이터 베이스 만들기
- create database capstone_test
+ create database capstone
  character set ='utf8'
  collate = 'utf8_general_ci';
 
@@ -51,7 +51,7 @@ create table major_univ (
 
 create table score (
 	id int not null auto_increment,
-    studentID int not null,
+    studentID varchar(255) not null,
     majorid int not null,
     score double not null,
     grade varchar(10) not null,
