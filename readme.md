@@ -11,6 +11,18 @@ $ npm install
 $ npm run init
 => server/config/index.js 수정
 $ npm run init
+$ pip install xlrd
+$ pip install datetime
+$ pip install numpy
+$ pip install pandas
+$ pip install matlotlib
+$ pip install standardscaler
+$ pip install train_test_split
+$ pip install KNeighborsClassifier
+$ pip install classification_report
+$ pip install metrics
+$ pip install pymysql
+$ npm run init
 ```
 ## 서버실행
 ``` sh

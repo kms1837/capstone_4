@@ -132,4 +132,4 @@ for i in df_1.index :
     elif df_1.loc[i,'등급'] == 1 :
         df_1.loc[i,'등급'] = 'Challenger'
 
-df_1.to_csv(r"C:/Users/User/Desktop/capstone_4/node/data/등급분류완료.csv", header = True, index = True)
+df_1.to_csv(r"C:/Users/User/Desktop/capstone_4/node/data/Grade_the_end.csv", header = True, index = True)
