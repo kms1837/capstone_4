@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from pandas import Series, DataFrame
 
-df = pd.read_csv('C:/Users/User/Desktop/capstone_4/node/data/g.csv')
+df = pd.read_csv('C:/Users/Administrator/Desktop/git/capstone_4/node/data/g.csv')
 
 a = df[['class_number', '소속']]
 class_number = a.drop_duplicates(['class_number'], keep='last')
@@ -29,7 +29,7 @@ import pymysql
 # 데이터 베이스에 접속하는 함수
 def get_connection() :
     conn = pymysql.connect(host='127.0.0.1', user='root',
-            password='6301tkrhk!@', db='capstone', charset='utf8')
+            password='dnrkim5823', db='capstone', charset='utf8')
 
     return conn
 
@@ -75,7 +75,7 @@ for i in class_number.index :
     k= k+1
 
 
-subject = pd.read_excel('C:/Users/User/Desktop/capstone_4/node/data/first.xlsx')
+subject = pd.read_excel('C:/Users/Administrator/Desktop/git/capstone_4/node/data/first.xlsx')
 
 subject["해당분야"] = subject["해당분야"].apply(lambda x: 1 if x == '코딩개발' else 2 if x ==  '수학'
                                     else 3 if x == '팀플'
@@ -117,7 +117,7 @@ def add_score(studentID, majorid, score, grade) :
     conn.commit()
     conn.close()
 
-df = pd.read_csv('C:/Users/User/Desktop/capstone_4/node/data/g.csv')
+df = pd.read_csv('C:/Users/Administrator/Desktop/git/capstone_4/node/data/g.csv')
 get_connection()
 for i in df.index :
     a = subject[subject['subject_name']==df['교과목명'][i]]
@@ -125,7 +125,7 @@ for i in df.index :
     b = int(b[0])
     add_score(df['class_number'][i],b, float(df['평점'][i]), df['등급'][i])    
 
-final_score = pd.read_csv('C:/Users/User/Desktop/capstone_4/node/data/등급분류완료.csv')
+final_score = pd.read_csv('C:/Users/Administrator/Desktop/git/capstone_4/node/data/등급분류완료.csv')
 
 import datetime
 
