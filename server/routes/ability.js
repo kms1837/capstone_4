@@ -10,11 +10,10 @@ router.get('/', (request, response) => {
     
 });
 
-router.get('/category', (request, response) => {
+router.get('/category', async(request, response) => {
     let userData = request.body;
-    abilityCategoryModel(userData.id).then( res => {
-        response.json(res);
-    });
+    let categoryList = await abilityCategoryModel(userData.id); 
+    response.json(categoryList);
 });
 
 router.post('/category', (request, response) => {
@@ -33,11 +32,11 @@ router.get('/score', (request, response) => {
     });
 });
 
-router.get('/category_eval', (request, response) => {
+router.get('/category_eval', async(request, response) => {
     let userData = request.body;
-    categoryEvalModel(userData.id).then( res => {
-        response.json(res);
-    });
+    let categoryEval = await categoryEvalModel(userData.id);
+
+    response.json(categoryEval);
 });
 
 router.get('/stu_spec', (request, response) => {

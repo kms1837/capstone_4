@@ -3,6 +3,6 @@ create table subject (
     majorname varchar(30) not null,
     subjectnumber int not null,
     name varchar(255) not null,
-    categoryID INT,
+    trackID INT,
     primary key (id)
 );
