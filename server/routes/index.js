@@ -12,7 +12,7 @@ module.exports = function (server) {
     server.use('/admin', admin);
 
     server.get('/', (request, response) => {
-        if (request.session.username) {
+        if (request.session.name) {
             response.redirect('/user/info');
         } else {
             response.redirect('/login');

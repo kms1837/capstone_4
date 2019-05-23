@@ -25,71 +25,25 @@
       width: 50%;
       margin-bottom: 10px;
     }
-
-    .sub-navbar-wrapper {
-      height: 50px;
+    .sub-menu {
+      margin-bottom: 10px;
     }
-
-    .sub-navbar {
-      background: #fff;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1;
-      
-      text-align: center;
-      box-shadow: 0px 0px 10px gainsboro;
+    .sub-menu button {
+      margin-right: 10px;
     }
-
-    .nav-items {
-      display: inline-block;
-      margin: 0 auto;
-      padding: 0;
-    }
-
-    .nav-items li {
-      display: inline-block;
-      padding: 10px 20px;
-    }
-
-    .nav-items li:hover {
-      background: #ccc;
-    }
-
-    .nav-items li a:hover {
-      text-decoration: none;
-    }
-
   </style>
 </head>
 
 <body>
   <div class="container-scroller">
-    <div class="container-fluid page-body-wrapper full-page-wrapper">
+    <% include ./partials/_navbar.ejs %>
+    <div class="container-fluid page-body-wrapper">
       <div class="content-wrapper">
-        <div class="sub-navbar-wrapper">
-          <div class="sub-navbar">
-            <ul class="nav-items">
-              <li>
-                <a href="#">트랙1</a>
-              </li>
-              <li>
-                <a href="#">트랙2</a>
-              </li>
-              <li>
-                <a href="#">트랙3</a>
-              </li>
-              <li>
-                <a href="#">트랙4</a>
-              </li>
-              <li>
-                <a href="#">트랙5</a>
-              </li>
-              <li>
-                <a href="#">트랙6</a>
-              </li>
-            </ul>
+        <div class="row">
+          <div class="col-md-12 sub-menu">
+          <% for(var i=0; i < cate.length; i++) { %>
+            <button class="btn btn-inverse-primary btn-fw"><%= cate[i].name %></button>
+          <% } %>
           </div>
         </div>
         <div class="row">
@@ -98,42 +52,25 @@
                 <div class="card-body">
                   <div class="profile text-center">
                     <img src="/public/images/faces/face1.jpg" class="faceimg" alt="image">
-                    <h1><%= user.username %></h1>
+                    <h1><%= user.name %></h1>
                   </div>
 
+                  
+                  <% for(var i=0; i < cateEval.length; i++) { %>
                   <div class="progress-wrapper">
-                    <h4 class="card-title">인공지능</h4>
+                    <h4 class="card-title"><%= cateEval[i].name %></h4>
                     <div class="progress">
-                      <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: <%= (cateEval[i].score/4.5) * 100 %>%" aria-valuenow="<%=cateEval[i].score %>" aria-valuemin="0" aria-valuemax="4.5"></div>
                     </div>
                   </div>
-
-                  <div class="progress-wrapper">
-                    <h4 class="card-title">빅데이터</h4>
-                    <div class="progress">
-                      <div class="progress-bar bg-gradient-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-
-                  <div class="progress-wrapper">
-                    <h4 class="card-title">카테고리3</h4>
-                    <div class="progress">
-                      <div class="progress-bar bg-gradient-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-
-                  <div class="progress-wrapper">
-                    <h4 class="card-title">카테고리4</h4>
-                    <div class="progress">
-                      <div class="progress-bar bg-gradient-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
+                  <% } %>
                 </div>
+
                 <div class="card-footer bg-gradient-danger card-img-holder text-white">
                   <div class="row">
                     <div class="col-md-8">
-                      <h1>Challenger</h1>
-                      <h5 class="card-text">500 sw</h5>
+                      <h1><%= finalScore.grade %></h1>
+                      <h5 class="card-text"><%= finalScore.score %> sw</h5>
                     </div>
                     <div class="col-md-3">
                         <img src="/public/images/faces/face1.jpg" class="asd" alt="image">
