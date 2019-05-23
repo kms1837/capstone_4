@@ -9,18 +9,89 @@
   <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
   <link rel="stylesheet" href="../../css/style.css">
   <link rel="shortcut icon" href="../../images/favicon.png" />
+
+  <style>
+  .sub-navbar-wrapper {
+    height: 50px;
+  }
+
+  .sub-navbar {
+    background: #fff;
+
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    position : fixed;
+    text-align: center;
+    box-shadow: 0px 0px 10px gainsboro;
+  }
+
+  .nav-items {
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .nav-items li {
+    display: inline-block;
+    padding: 10px ;
+  }
+
+  .nav-items li:hover {
+    background: #ccc;
+  }
+
+  .nav-items li a:hover {
+    text-decoration: none;
+  }
+
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
 </head>
 
 <body>
+
   <div class="container-scroller">
+
     <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper">
+          <div class="sub-navbar-wrapper">
+            <div class="sub-navbar">
+              <ul class="nav-items">
+                <li>
+                <a href="admin_main.html"  class="btn btn-inverse-primary btn-fw">학생상세조회
+
+                </a>
+                </li>
+                <li>
+                  <a href="트랙조회.html" class="btn btn-inverse-primary btn-fw">트랙별조회</a>
+                </li>
+                <li>
+                  <a href="accept_spec.html" class="btn btn-inverse-primary btn-fw">외부스펙승인</a>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="학생 이름 조회" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <div class="input-group-append">
+            <input id = "myInput" type="text" class="form-control" placeholder="학생 이름 조회" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append" id="myDIV">
               <button class="btn btn-sm btn-gradient-primary" type="button">Search</button>
             </div>
           </div>
+
           <br><br>
           <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
@@ -38,16 +109,16 @@
                           User
                         </th>
                         <th>
-                          First name
+                          이름
                         </th>
                         <th>
-                          Progress
+                          학번
                         </th>
                         <th>
-                          Amount
+                          총 평점
                         </th>
                         <th>
-                          Deadline
+                          SW역량등급
                         </th>
                         <th>
                           카테고리 역량조회
@@ -60,24 +131,22 @@
                         </th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="myTable">
                       <tr>
                         <td class="py-1">
                           <img src="../../images/faces-clipart/pic-1.png" alt="image">
                         </td>
                         <td>
-                          Herman Beck
+                          홍길동
                         </td>
                         <td>
-                          <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
+                          <%= user.studentID %>
                         </td>
                         <td>
-                          $ 77.99
+                          <%= final_score.final_score %>
                         </td>
                         <td>
-                          May 15, 2015
+                          <%= final_score.final_grade %>
                         </td>
                         <td>
                           <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalA" > s01 radarChart	</button>
@@ -144,7 +213,6 @@
                                               <div class="card">
                                                 <div class="card-body">
                                                   <canvas id="raderChart" style="height:230px"></canvas>
-                                                  <a class="btn btn-success float-right" href="javascript:doDisplay();">스펙추가+</a>
                                                 </div>
 
                                               </div>
@@ -191,7 +259,7 @@
                                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                                      </div>
                                     <div class="modal-body">
-                                                S01 학생에 대한 교수의견
+                                                <%=final_score.professor%>
                                      </div>
                                          <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -207,18 +275,16 @@
                           <img src="../../images/faces-clipart/pic-2.png" alt="image">
                         </td>
                         <td>
-                          Messsy Adam
+                          <%= user.name %>
                         </td>
                         <td>
-                          <div class="progress">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
+                          <%= user.studentID %>
                         </td>
                         <td>
-                          $245.30
+                          <%= final_score.final_score %>
                         </td>
                         <td>
-                          July 1, 2015
+                          <%= final_score.final_grade %>
                         </td>
                         <td>
                           <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal@" > s01 radarChart	</button>
@@ -289,18 +355,16 @@
                           <img src="../../images/faces-clipart/pic-3.png" alt="image">
                         </td>
                         <td>
-                          John Richards
+                          <%= user.name %>
                         </td>
                         <td>
-                          <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
+                          <%= user.studentID %>
                         </td>
                         <td>
-                          $138.00
+                          <%= final_score.final_score %>
                         </td>
                         <td>
-                          Apr 12, 2015
+                          <%= final_score.final_grade %>
                         </td>
                         <td>
                           <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalC" > s01 radarChart	</button>
@@ -371,18 +435,16 @@
                           <img src="../../images/faces-clipart/pic-4.png" alt="image">
                         </td>
                         <td>
-                          Peter Meggik
+                          <%= user.name %>
                         </td>
                         <td>
-                          <div class="progress">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
+                          <%= user.studentID %>
                         </td>
                         <td>
-                          $ 77.99
+                          <%= final_score.final_score %>
                         </td>
                         <td>
-                          May 15, 2015
+                          <%= final_score.final_grade %>
                         </td>
                         <td>
                           <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalD" > s01 radarChart	</button>
@@ -453,18 +515,16 @@
                           <img src="../../images/faces-clipart/pic-1.png" alt="image">
                         </td>
                         <td>
-                          Edward
+                          <%= user.name %>
                         </td>
                         <td>
-                          <div class="progress">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
+                          <%= user.studentID %>
                         </td>
                         <td>
-                          $ 160.25
+                          <%= final_score.final_score %>
                         </td>
                         <td>
-                          May 03, 2015
+                          <%= final_score.final_grade %>
                         </td>
                         <td>
                           <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalE" > s01 radarChart	</button>
@@ -535,18 +595,16 @@
                           <img src="../../images/faces-clipart/pic-2.png" alt="image">
                         </td>
                         <td>
-                          John Doe
+                          <%= user.name %>
                         </td>
                         <td>
-                          <div class="progress">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
+                          <%= user.studentID %>
                         </td>
                         <td>
-                          $ 123.21
+                          <%= final_score.final_score %>
                         </td>
                         <td>
-                          April 05, 2015
+                          <%= final_score.final_grade %>
                         </td>
                         <td>
                           <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalF" > s01 radarChart	</button>
@@ -617,18 +675,16 @@
                           <img src="../../images/faces-clipart/pic-3.png" alt="image">
                         </td>
                         <td>
-                          Henry Tom
+                          <%= user.name %>
                         </td>
                         <td>
-                          <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
+                          <%= user.studentID %>
                         </td>
                         <td>
-                          $ 150.00
+                          <%= final_score.final_score %>
                         </td>
                         <td>
-                          June 16, 2015
+                          <%= final_score.final_grade %>
                         </td>
                         <td>
                           <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalG" > s01 radarChart	</button>
@@ -706,10 +762,46 @@
         </div>
     </div>
   </div>
+
   <script src="../../vendors/js/vendor.bundle.base.js"></script>
   <script src="../../vendors/js/vendor.bundle.addons.js"></script>
   <script src="../../js/off-canvas.js"></script>
   <script src="../../js/misc.js"></script>
+  <script>
+    var ctx = document.getElementById('raderChart').getContext('2d');
+    var options = {
+      scale: {
+        pointLabels: {
+          fontSize: 20,
+          fontStyle: '300',
+          fontColor: 'rgba(0, 0, 0, 1)',
+          fontFamily: "맑은 고딕, sans-serif"
+        },
+        ticks: {
+          beginAtZero: true,
+          maxTicksLimit: 2,
+          min: 0,
+          max: 10
+        }
+      }
+    };
+
+    var myChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ['코딩 개발', '수학', '팀플', '총학점', '스펙'],
+            datasets: [
+            {
+                label: '점수',
+                data: [8, 6, 4, 6, 4],
+                backgroundColor: 'rgba(255, 99, 132, 1)',
+                borderColor: 'rgba(255, 99, 0, 1)',
+                fill: 1
+            }],
+        },
+        options : options
+    });
+  </script>
 </body>
 
 </html>
