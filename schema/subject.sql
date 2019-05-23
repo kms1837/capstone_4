@@ -1,8 +1,7 @@
 create table subject (
 	id int not null auto_increment,
-    majorname varchar(30) not null,
-    subjectnumber int not null,
+    subjectnumber varchar(255) not null,
     name varchar(255) not null,
-    categoryID INT,
+    trackID INT, -- 트렉아이디 수정
     primary key (id)
 );

@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from pandas import Series, DataFrame
 
-df = pd.read_csv('C:/Users/User/Desktop/capstone_4/node/data/g.csv')
+df = pd.read_csv('../node/data/g.csv')
 
 a = df[['class_number', '소속']]
 class_number = a.drop_duplicates(['class_number'], keep='last')
@@ -51,21 +51,22 @@ def add_user(studentID, name, password, departID, email, auth) :
     conn.close()
 
 # 과목 저장
-def add_subject(majorname, subjectnumber, name, categoryID) :
+def add_subject(majorname, subjectnumber, name, trackID) :
     # 쿼리문
     sql = '''insert into user
-             (subjectnumber, name, categoryID) values (%s, %s, %s)'''
+             (subjectnumber, name, tackID) values (%s, %s, %s)'''
 
     # 접속
     conn = get_connection()
     # 쿼리실행
     cursor = conn.cursor()
-    cursor.execute(sql, (subjectnumber, name, categoryID))
+    cursor.execute(sql, (subjectnumber, name, trackID))
 
     # 접속해제
     conn.commit()
     conn.close()
 
+get_connection()
 k=0
 for i in class_number.index :
     a = class_number['departID'][k]
@@ -74,32 +75,62 @@ for i in class_number.index :
     k= k+1
 
 
-subject = pd.read_excel('C:/Users/User/Desktop/capstone_4/node/data/first.xlsx')
+
+subject = pd.read_excel('../node/data/first.xlsx')
+track = pd.read_excel('../node/data/track.xlsx')
+
+track_1 = pd.merge(subject, track, how='outer')
 
 subject["해당분야"] = subject["해당분야"].apply(lambda x: 1 if x == '코딩개발' else 2 if x ==  '수학'
                                     else 3 if x == '팀플'
                                     else 4)
 
-def add_subject(subjectnumber, name, categoryID) :
+def add_subject(subjectnumber, name, trackID) :
     # 쿼리문
     sql = '''insert into subject
-             (subjectnumber, name, categoryID) values (%s, %s, %s)'''
+             (subjectnumber, name, trackID) values (%s, %s, %s)'''
 
     # 접속
     conn = get_connection()
     # 쿼리실행
     cursor = conn.cursor()
-    cursor.execute(sql, (subjectnumber, name, categoryID))
+    cursor.execute(sql, (subjectnumber, name, trackID))
 
     # 접속해제
     conn.commit()
     conn.close()
-    
-for i in subject.index :
-    a = subject['해당분야'][i]
-    a = int(a)
-    add_subject(subject['교과목번호'][i], subject['subject_name'][i], a)
-    
+
+get_connection()
+
+def add_track(id, name, track_explain) :
+    # 쿼리문
+    sql = '''insert into track
+             (id, name, track_explain) values (%s, %s, %s)'''
+
+    # 접속
+    conn = get_connection()
+    # 쿼리실행
+    cursor = conn.cursor()
+    cursor.execute(sql, (id, name, track_explain))
+
+    # 접속해제
+    conn.commit()
+    conn.close()
+
+get_connection()
+
+add_track(1, '시스템응용', '시스템응용')
+add_track(2, '멀티미디어', '멀티미디어')
+add_track(3, '사물인터넷', '사물인터넷')
+add_track(4, '인공지능', '인공지능')
+add_track(5, '가상현실', '가상현실')
+add_track(6, 'SW교육', 'SW교육')
+add_track(7, '정보보호', '정보보호')
+add_track(8, '데이터사이언스', '데이터사이언스')
+add_track(9, '사이버국방', '사이버국방')
+add_track(10, 'HCI&비쥬얼컴퓨팅', 'HCI&비쥬얼컴퓨팅')
+
+
 def add_score(studentID, majorid, score, grade) :
     # 쿼리문
     sql = '''insert into score
@@ -115,14 +146,15 @@ def add_score(studentID, majorid, score, grade) :
     conn.commit()
     conn.close()
 
-df = pd.read_csv('C:/Users/User/Desktop/capstone_4/node/data/g.csv')
+df = pd.read_csv('../node/data/g.csv')
+get_connection()
 for i in df.index :
     a = subject[subject['subject_name']==df['교과목명'][i]]
     b = a.index.values
     b = int(b[0])
-    add_score(df['class_number'][i],b, float(df['평점'][i]), df['등급'][i])    
+    add_score(df['class_number'][i],b, float(df['평점'][i]), df['등급'][i])
 
-final_score = pd.read_csv('C:/Users/User/Desktop/capstone_4/node/data/등급분류완료.csv')
+final_score = pd.read_csv('../node/data/등급분류완료.csv')
 
 import datetime
 
@@ -163,6 +195,24 @@ k=0
 for i in depart.index :
     add_department(int(depart['departID'][i]), depart['소속'][i])
     k = k+1
-    
-    
-    
+
+def add_student_track() :
+    # 쿼리문
+    sql = '''insert into student_track
+             (studentID, trackID, track_score)
+             select x.studentID, y.trackID, avg(x.score)
+             from score x, subject y
+             where x.majorid = y.id
+             group by x.studentID, y.trackID;'''
+
+    # 접속
+    conn = get_connection()
+    # 쿼리실행
+    cursor = conn.cursor()
+    cursor.execute(sql, ())
+
+    # 접속해제
+    conn.commit()
+    conn.close()
+
+add_student_track()
