@@ -18,7 +18,7 @@
     <div class="container-fluid page-body-wrapper">
       <div class="content-wrapper">
           <% include ./partials/_admin-menu.ejs %>
-          
+
           <div class="input-group">
             <input id = "myInput" type="text" class="form-control" placeholder="학생 이름 조회" aria-label="Recipient's username" aria-describedby="basic-addon2">
             <div class="input-group-append" id="myDIV">
@@ -34,7 +34,7 @@
                   <div class="card-body">
                   <h4 class="card-title">학생 상세조회</h4>
                   <p class="card-description">
-                    Add class <code>.table-striped</code>
+                    학생에 대한 정보를 조회합니다.
                   </p>
                   <table class="table table-striped">
                     <thead>
@@ -83,10 +83,11 @@
                 </div>
               </div>
             </div>
-
+            
           </div>
         </div>
-    </div>
+      </div>
+      <% include ./partials/_footer.ejs %>
   </div>
   <script src="/public/vendors/js/vendor.bundle.base.js"></script>
   <script src="/public/vendors/js/vendor.bundle.addons.js"></script>
