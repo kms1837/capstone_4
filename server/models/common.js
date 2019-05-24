@@ -40,8 +40,10 @@ module.exports = {
             const connection = await database.getConnection(async conn=>conn);
             try {
                 let sql = `INSERT INTO ${tableName} SET ?`;
-                let [rows] = await connection.query(sql, items);
+                let [row] = await connection.query(sql, items);
                 connection.release();
+
+                return row.insertId;
             }
             catch(err) {
                 await connection.rollback();

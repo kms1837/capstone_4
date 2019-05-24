@@ -10,5 +10,13 @@ module.exports = {
 
     findToID(id) {
         return common.findToID(tableName, id);
+    },
+
+    getList() {
+        return common.select(tableName, 'limit 100',[]);
+    },
+
+    getScoreList() {
+        return common.select(tableName, 'JOIN final_score ON studentID=final_score.studentID limit 100',[]);
     }
 };
