@@ -1,0 +1,10 @@
+INSERT INTO track(name,track_explain) VALUES ("가상현실","수학에 대한 능력");
+INSERT INTO track(name,track_explain) VALUES ("사물인터넷","대외 활동에 대한 능력");
+INSERT INTO track(name,track_explain) VALUES ("사이버국방","코딩 능력");
+INSERT INTO track(name,track_explain) VALUES ("시스템운용","학점");
+INSERT INTO track(name,track_explain) VALUES ("데이터사이언스","팀프로젝트");
+INSERT INTO track(name,track_explain) VALUES ("멀티미디어","팀프로젝트");
+INSERT INTO track(name,track_explain) VALUES ("인공지능","팀프로젝트");
+INSERT INTO track(name,track_explain) VALUES ("정보보호","팀프로젝트");
+INSERT INTO track(name,track_explain) VALUES ("HCI비쥬얼 컴퓨팅","팀프로젝트");
+INSERT INTO track(name,track_explain) VALUES ("컴퓨팅 SW교육","팀프로젝트");

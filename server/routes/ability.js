@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const abilityCategoryModel = require('../models/ability_category');
+const abilityCategoryModel = require('../models/track');
 const scoreModel = require('../models/score');
 const categoryEvalModel = require('../models/category_eval');
 const stuSpecModel = require('../models/stu_spec');
+const fileModel = require('../models/file');
 
 router.get('/', (request, response) => {
     
@@ -37,6 +38,12 @@ router.get('/category_eval', async(request, response) => {
     let categoryEval = await categoryEvalModel(userData.id);
 
     response.json(categoryEval);
+});
+
+router.post('/stu_spec', async(request, response) => {
+    let fileID = await fileModel.upload(request, response);
+    await stuSpecModel.insert(request, fileID);
+    response.status(200).send("");
 });
 
 router.get('/stu_spec', (request, response) => {

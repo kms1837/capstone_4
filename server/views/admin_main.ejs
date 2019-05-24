@@ -9,24 +9,32 @@
   <link rel="stylesheet" href="/public/vendors/css/vendor.bundle.base.css">
   <link rel="stylesheet" href="/public/css/style.css">
   <link rel="shortcut icon" href="/public/images/favicon.png" />
+  <link rel="stylesheet" href="/public/css/main.css">
 </head>
 
 <body>
   <div class="container-scroller">
-    <div class="container-fluid page-body-wrapper full-page-wrapper">
-        <div class="content-wrapper">
+    <% include ./partials/_navbar.ejs %>
+    <div class="container-fluid page-body-wrapper">
+      <div class="content-wrapper">
+          <% include ./partials/_admin-menu.ejs %>
+
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="학생 이름 조회" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <div class="input-group-append">
+            <input id = "myInput" type="text" class="form-control" placeholder="학생 이름 조회" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append" id="myDIV">
               <button class="btn btn-sm btn-gradient-primary" type="button">Search</button>
             </div>
           </div>
+
           <br><br>
-          <div class="card">
+          <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
                 <div class="card-body">
+                  <div class="card-body">
                   <h4 class="card-title">학생 상세조회</h4>
                   <p class="card-description">
-                    Add class <code>.table-striped</code>
+                    학생에 대한 정보를 조회합니다.
                   </p>
                   <table class="table table-striped">
                     <thead>
@@ -35,320 +43,67 @@
                           User
                         </th>
                         <th>
-                          First name
+                          이름
                         </th>
                         <th>
-                          Progress
+                          학번
                         </th>
                         <th>
-                          Amount
+                          총 평점
                         </th>
                         <th>
-                          Deadline
+                          SW역량등급
                         </th>
                         <th>
-                          교수의견 보기
+                          카테고리 역량조회
+                        </th>
+                        <th>
+                          교수 의견등록
+                        </th>
+                        <th>
+                          교수 의견조회
                         </th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="myTable">
+                    <% for(var i=0; i<students.length; i++) { %>
                       <tr>
-                        <td class="py-1">
-                          <img src="/public/images/faces-clipart/pic-1.png" alt="image">
-                        </td>
-                        <td>
-                          Herman Beck
-                        </td>
-                        <td>
-                          <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </td>
-                        <td>
-                          $ 77.99
-                        </td>
-                        <td>
-                          May 15, 2015
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalA" > s01 radarChart	</button>
-	                         <!-- 모달 팝업 -->
-	                          <div class="modal fade" id="myModalA" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-	                             <div class="modal-dialog">
-	                                <div class="modal-content">
-	                                   <div class="modal-header">
-                                       <h4 class="modal-title" id="myModalLabel">S01</h4>
-		                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	                                   </div>
-	                                  <div class="modal-body">
-		                                            교수 종합 의견
-	                                   </div>
-	                                       <div class="modal-footer">
-		                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		                                        <button type="button" class="btn btn-primary">Save changes</button>
-	                                       </div>
-	                                    </div>
-	                              </div>
-	                           </div>
-                        </td>
+                        <td><%= (i+1) %></td>
+                        <td><%= students[i].name %></td>
+                        <td><%= students[i].studentID %></td>
+                        <td><%= students[i].studentID %></td>
+                        <td><%= students[i].studentID %></td>
+                        <td><%= students[i].studentID %></td>
+                        <td><%= students[i].studentID %></td>
                       </tr>
-                      <tr>
-                        <td class="py-1">
-                          <img src="/public/images/faces-clipart/pic-2.png" alt="image">
-                        </td>
-                        <td>
-                          Messsy Adam
-                        </td>
-                        <td>
-                          <div class="progress">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </td>
-                        <td>
-                          $245.30
-                        </td>
-                        <td>
-                          July 1, 2015
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalA" > s01 radarChart	</button>
-	                         <!-- 모달 팝업 -->
-	                          <div class="modal fade" id="myModalA" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-	                             <div class="modal-dialog">
-	                                <div class="modal-content">
-	                                   <div class="modal-header">
-                                       <h4 class="modal-title" id="myModalLabel">S01</h4>
-		                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	                                   </div>
-	                                  <div class="modal-body">
-		                                            교수 종합 의견
-	                                   </div>
-	                                       <div class="modal-footer">
-		                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		                                        <button type="button" class="btn btn-primary">Save changes</button>
-	                                       </div>
-	                                    </div>
-	                              </div>
-	                           </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="py-1">
-                          <img src="/public/images/faces-clipart/pic-3.png" alt="image">
-                        </td>
-                        <td>
-                          John Richards
-                        </td>
-                        <td>
-                          <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </td>
-                        <td>
-                          $138.00
-                        </td>
-                        <td>
-                          Apr 12, 2015
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalA" > s01 radarChart	</button>
-	                         <!-- 모달 팝업 -->
-	                          <div class="modal fade" id="myModalA" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-	                             <div class="modal-dialog">
-	                                <div class="modal-content">
-	                                   <div class="modal-header">
-                                       <h4 class="modal-title" id="myModalLabel">S01</h4>
-		                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	                                   </div>
-	                                  <div class="modal-body">
-		                                            교수 종합 의견
-	                                   </div>
-	                                       <div class="modal-footer">
-		                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		                                        <button type="button" class="btn btn-primary">Save changes</button>
-	                                       </div>
-	                                    </div>
-	                              </div>
-	                           </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="py-1">
-                          <img src="/public/images/faces-clipart/pic-4.png" alt="image">
-                        </td>
-                        <td>
-                          Peter Meggik
-                        </td>
-                        <td>
-                          <div class="progress">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </td>
-                        <td>
-                          $ 77.99
-                        </td>
-                        <td>
-                          May 15, 2015
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalA" > s01 radarChart	</button>
-	                         <!-- 모달 팝업 -->
-	                          <div class="modal fade" id="myModalA" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-	                             <div class="modal-dialog">
-	                                <div class="modal-content">
-	                                   <div class="modal-header">
-                                       <h4 class="modal-title" id="myModalLabel">S01</h4>
-		                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	                                   </div>
-	                                  <div class="modal-body">
-		                                            교수 종합 의견
-	                                   </div>
-	                                       <div class="modal-footer">
-		                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		                                        <button type="button" class="btn btn-primary">Save changes</button>
-	                                       </div>
-	                                    </div>
-	                              </div>
-	                           </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="py-1">
-                          <img src="/public/images/faces-clipart/pic-1.png" alt="image">
-                        </td>
-                        <td>
-                          Edward
-                        </td>
-                        <td>
-                          <div class="progress">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </td>
-                        <td>
-                          $ 160.25
-                        </td>
-                        <td>
-                          May 03, 2015
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalA" > s01 radarChart	</button>
-	                         <!-- 모달 팝업 -->
-	                          <div class="modal fade" id="myModalA" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-	                             <div class="modal-dialog">
-	                                <div class="modal-content">
-	                                   <div class="modal-header">
-                                       <h4 class="modal-title" id="myModalLabel">S01</h4>
-		                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	                                   </div>
-	                                  <div class="modal-body">
-		                                            교수 종합 의견
-	                                   </div>
-	                                       <div class="modal-footer">
-		                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		                                        <button type="button" class="btn btn-primary">Save changes</button>
-	                                       </div>
-	                                    </div>
-	                              </div>
-	                           </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="py-1">
-                          <img src="/public/images/faces-clipart/pic-2.png" alt="image">
-                        </td>
-                        <td>
-                          John Doe
-                        </td>
-                        <td>
-                          <div class="progress">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </td>
-                        <td>
-                          $ 123.21
-                        </td>
-                        <td>
-                          April 05, 2015
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalA" > s01 radarChart	</button>
-	                         <!-- 모달 팝업 -->
-	                          <div class="modal fade" id="myModalA" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-	                             <div class="modal-dialog">
-	                                <div class="modal-content">
-	                                   <div class="modal-header">
-                                       <h4 class="modal-title" id="myModalLabel">S01</h4>
-		                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	                                   </div>
-	                                  <div class="modal-body">
-		                                            교수 종합 의견
-	                                   </div>
-	                                       <div class="modal-footer">
-		                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		                                        <button type="button" class="btn btn-primary">Save changes</button>
-	                                       </div>
-	                                    </div>
-	                              </div>
-	                           </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="py-1">
-                          <img src="/public/images/faces-clipart/pic-3.png" alt="image">
-                        </td>
-                        <td>
-                          Henry Tom
-                        </td>
-                        <td>
-                          <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </td>
-                        <td>
-                          $ 150.00
-                        </td>
-                        <td>
-                          June 16, 2015
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalA" > s01 radarChart	</button>
-	                         <!-- 모달 팝업 -->
-	                          <div class="modal fade" id="myModalA" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-	                             <div class="modal-dialog">
-	                                <div class="modal-content">
-	                                   <div class="modal-header">
-                                       <h4 class="modal-title" id="myModalLabel">S01</h4>
-		                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	                                   </div>
-	                                  <div class="modal-body">
-		                                            교수 종합 의견
-	                                   </div>
-	                                       <div class="modal-footer">
-		                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		                                        <button type="button" class="btn btn-primary">Save changes</button>
-	                                       </div>
-	                                    </div>
-	                              </div>
-	                           </div>
-                        </td>
-                      </tr>
+                    <% } %>
                     </tbody>
                   </table>
                 </div>
+                </div>
               </div>
-
+            </div>
+            
           </div>
-          </div>
-
         </div>
-        </div>
-        </div>
-    </div>
+      </div>
+      <% include ./partials/_footer.ejs %>
   </div>
   <script src="/public/vendors/js/vendor.bundle.base.js"></script>
   <script src="/public/vendors/js/vendor.bundle.addons.js"></script>
   <script src="/public/js/off-canvas.js"></script>
   <script src="/public/js/misc.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script>
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+  </script>
 </body>
 
 </html>

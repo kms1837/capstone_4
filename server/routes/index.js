@@ -13,7 +13,11 @@ module.exports = function (server) {
 
     server.get('/', (request, response) => {
         if (request.session.name) {
-            response.redirect('/user/info');
+            if (request.session.auth) {
+                response.redirect('/admin');
+            } else {
+                response.redirect('/user/info');
+            }
         } else {
             response.redirect('/login');
         }

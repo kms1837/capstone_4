@@ -1,5 +1,5 @@
 const common = require('./common');
-const tableName = "ability_category";
+const tableName = "track";
 
 module.exports = {
     findToID(id) {

@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon app.js",
     "build": "babel --presets babel-preset-es2017 public/js_es6 -d public/js/ -w",
+    "sample": "node sample_input.js",
     "init": "node init.js"
   },
   "author": "",
@@ -23,7 +24,8 @@
     "mysql": "^2.16.0",
     "mysql2": "^1.6.5",
     "nodemon": "^1.19.0",
-    "promise-mysql": "^3.3.1"
+    "promise-mysql": "^3.3.1",
+    "util": "^0.12.0"
   },
   "dependencies": {
     "multer": "^1.4.1"

@@ -9,27 +9,31 @@
   <link rel="stylesheet" href="/public/vendors/css/vendor.bundle.base.css">
   <link rel="stylesheet" href="/public/css/style.css">
   <link rel="shortcut icon" href="/public/images/favicon.png" />
+  <link rel="stylesheet" href="/public/css/main.css">
 </head>
 
 <body>
   <div class="container-scroller">
-    <div class="container-fluid page-body-wrapper full-page-wrapper">
+    <% include ./partials/_navbar.ejs %>
+    <div class="container-fluid page-body-wrapper">
         <div class="content-wrapper">
+          <% include ./partials/_admin-menu.ejs %>
           <div class="row">
             <div class="col-md-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-                  <div class="template-demo">
-                    <button type="button" class="btn btn-gradient-primary btn-fw">가상현실</button>
-                    <button type="button" class="btn btn-gradient-secondary btn-fw">사물인터넷</button>
-                    <button type="button" class="btn btn-gradient-success btn-fw">Success</button>
-                    <button type="button" class="btn btn-gradient-danger btn-fw">Danger</button>
-                    <button type="button" class="btn btn-gradient-warning btn-fw">Warning</button>
-                    <button type="button" class="btn btn-gradient-info btn-fw">Info</button>
-                    <button type="button" class="btn btn-gradient-light btn-fw">Light</button>
-                    <button type="button" class="btn btn-gradient-dark btn-fw">Dark</button>
-                    <button type="button" class="btn btn-link btn-fw">Link</button>
-                  </div>
+                    <div class="template-demo">
+                        <a href="javascript:f_track1();"  class="btn btn-inverse-primary btn-fw">가상현실</a>
+                        <a href="#" class="btn btn-inverse-primary btn-fw">사물인터넷</a>
+                        <a href="#" class="btn btn-inverse-primary btn-fw">사이버국방</a>
+                        <a href="#" class="btn btn-inverse-primary btn-fw">시스템운용</a>
+                        <a href="#" class="btn btn-inverse-primary btn-fw">DataScience</a>
+                        <a href="#" class="btn btn-inverse-primary btn-fw">멀티미디어</a>
+                        <a href="#" class="btn btn-inverse-primary btn-fw">인공지능</a>
+                        <a href="#" class="btn btn-inverse-primary btn-fw">정보보호</a>
+                        <a href="#" class="btn btn-inverse-primary btn-fw">HCI비쥬얼</a>
+                        <a href="#" class="btn btn-inverse-primary btn-fw">SW교육</a>
+                    </div>
                 </div>
               </div>
             </div>
@@ -37,9 +41,9 @@
               <div class="card">
                 <div class="card-body">
                   <div class="card-body">
-                  <h4 class="card-title">Striped Table</h4>
+                  <h4 class="card-title">트랙별 조회</h4>
                   <p class="card-description">
-                    Add class <code>.table-striped</code>
+                    트랙별로 조회합니다.
                   </p>
                   <table class="table table-striped">
                     <thead>
@@ -48,16 +52,16 @@
                           User
                         </th>
                         <th>
-                          First name
+                          이름
                         </th>
                         <th>
-                          Progress
+                          학번
                         </th>
                         <th>
-                          Amount
+                          가상현실_과목1
                         </th>
                         <th>
-                          Deadline
+                          가상현실_과목2
                         </th>
                       </tr>
                     </thead>
@@ -214,7 +218,7 @@
                 <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                      <h4 class="card-title">막대 그래프</h4>
+                      <h4 class="card-title">전체 학생 가상현실 평점</h4>
                       <canvas id="myChart"></canvas>
                       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
                       <script>
@@ -241,18 +245,40 @@
                   </div>
                 </div>
                 <div class="col-md-12 grid-margin stretch-card">
-                  <div class="card">
-                    <div class="card-body">
-                      트랙1 성적
-                    </div>
-                  </div>
+                    <div class="card">
+                        <div class="card-body">
+                          <h4 class="card-title"><%=user.name%> 가상현실 트랙(과목 성적)</h4>
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>과목명</th>
+                                <th>성적</th>
+        
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>가상현실_과목1</td>
+        
+                                <td><label class="badge badge-danger">A+</label></td>
+                              </tr>
+                              <tr>
+                                <td>가상현실_과목2</td>
+        
+                                <td><label class="badge badge-warning">A0</label></td>
+                              </tr>
+        
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
     </div>
+    <% include ./partials/_footer.ejs %>
   </div>
   <script src="/public/vendors/js/vendor.bundle.base.js"></script>
   <script src="/public/vendors/js/vendor.bundle.addons.js"></script>

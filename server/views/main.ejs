@@ -9,29 +9,7 @@
   <link rel="stylesheet" href="/public/vendors/css/vendor.bundle.base.css">
   <link rel="stylesheet" href="/public/css/style.css">
   <link rel="shortcut icon" href="/public/images/favicon.png" />
-  <style>
-    .progress-wrapper {
-      margin-bottom: 10px;
-    }
-    .progress {
-      height: 25px;
-    }
-    .profile {
-      border-bottom: 1px solid #ccc;
-      margin-bottom: 10px;
-    }
-    .profile .faceimg {
-      border-radius: 100%;
-      width: 50%;
-      margin-bottom: 10px;
-    }
-    .sub-menu {
-      margin-bottom: 10px;
-    }
-    .sub-menu button {
-      margin-right: 10px;
-    }
-  </style>
+  <link rel="stylesheet" href="/public/css/main.css">
 </head>
 
 <body>
@@ -41,8 +19,8 @@
       <div class="content-wrapper">
         <div class="row">
           <div class="col-md-12 sub-menu">
-          <% for(var i=0; i < cate.length; i++) { %>
-            <button class="btn btn-inverse-primary btn-fw"><%= cate[i].name %></button>
+          <% for(var i=0; i < track.length; i++) { %>
+            <button class="btn btn-inverse-primary btn-fw" href="#detail" data-id="<%= track[i].id %>"><%= track[i].name %></button>
           <% } %>
           </div>
         </div>
@@ -56,11 +34,11 @@
                   </div>
 
                   
-                  <% for(var i=0; i < cateEval.length; i++) { %>
+                  <% for(var i=0; i < stats.length; i++) { %>
                   <div class="progress-wrapper">
-                    <h4 class="card-title"><%= cateEval[i].name %></h4>
+                    <h4 class="card-title"><%= stats[i].name %></h4>
                     <div class="progress">
-                      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: <%= (cateEval[i].score/4.5) * 100 %>%" aria-valuenow="<%=cateEval[i].score %>" aria-valuemin="0" aria-valuemax="4.5"></div>
+                      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: <%= (stats[i].score/4.5) * 100 %>%" aria-valuenow="<%=stats[i].score %>" aria-valuemin="0" aria-valuemax="4.5"></div>
                     </div>
                   </div>
                   <% } %>
@@ -69,7 +47,7 @@
                 <div class="card-footer bg-gradient-danger card-img-holder text-white">
                   <div class="row">
                     <div class="col-md-8">
-                      <h1><%= finalScore.grade %></h1>
+                      <h1><%= finalScore.final_grade %></h1>
                       <h5 class="card-text"><%= finalScore.score %> sw</h5>
                     </div>
                     <div class="col-md-3">
@@ -80,56 +58,212 @@
               </div>
             </div>
             <div class="col-md-9 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <canvas id="raderChart" style="height:230px"></canvas>
-                    <a class="btn btn-success float-right">스펙추가+</a>
-                  </div>
+              <div class="card">
+                <div class="card-body">
+                  <canvas id="raderChart" style="height:230px"></canvas>
+
+                    <li class="nav-item dropdown">
+                      <a class="btn btn-success float-right nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">스펙</a>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#addSpec">스펙추가 요청</a>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#specList">스펙목록</a>
+                      </div>
+                    </li>
                 </div>
               </div>
+            </div>
         </div>
+        <div class="row" id="detail">
+          <div class="col-12 grid-margin stretch-card" style="display:none" id="track1">
+            <div class="card">
+              <div class="card-body">
+                  <h2 class="card-title">Card title</h2>
+                  <div class="row justify-content-between">
+                    <div class="col-md-6">
+                      <canvas id="barChart" style="height:500px"></canvas>
+                    </div>
+                    <div class="col-md-4">
+                      <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>과목명</th>
+                              <th>성적</th>
+                            </tr>
+                          </thead>
+                          <tbody id="myTable">
+                            <tr>
+                              <td>과목1</td>
+                              <td>A+</td>
+                            </tr>
+                            <tr>
+                              <td>과목2</td>
+                              <td>C+</td>
+                            </tr>
+                            <tr>
+                              <td>과목3</td>
+                              <td>B+</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="modal fade" id="specList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">스펙 목록</h4>
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              </div>
+              <div class="modal-body">
+                  <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>스펙명</th>
+                          <th>종류</th>
+                          <th>점수</th>
+                          <th>파일</th>
+                          <th>설명</th>
+                          <th>요청날짜</th>
+                          <th>승인날짜</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% for(var i=0; i<specList.length; i++) { %>
+                          <tr>
+                            <td><%= specList[i].name %></td>
+                            <td><%= specList[i].spec_typeID %></td>
+                            <td><%= specList[i].score %></td>
+                            <td><a target="_blank" class="btn btn-default" href="/uploads/<%= specList[i].path %>">파일보기</a></td>
+                            <td><%= specList[i].spec_explain %></td>
+                            <td><%= specList[i].request_date %></td>
+                            <td><%= specList[i].agree_date %></td>
+                          </tr>
+                        <% } %>
+                        </tbody>
+                    </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="addSpec" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="myModalLabel">학생 외부 스펙 입력</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                      <div class="card-body">
+                        <form class="forms-sample">
+                          <div class="form-group">
+                            <label>스펙 종류</label>
+                            <select class="form-control form-control-lg" id="type">
+                              <option value="1" selected>자격증</option>
+                              <option value="2">공모전</option>
+                              <option value="3">인턴정보</option>
+                              <option value="4">어학연수</option>
+                              <option value="5">어학성적</option>
+                              <option value="6">교육프로그램</option>
+                            </select>
+                          </div>
+
+                          <div class="form-group">
+                            <label>스펙명</label>
+                            <input type="text" class="form-control" id="name" placeholder="스펙명">
+                          </div>
+                          
+                          <div class="form-group">
+                            <label>증빙 자료</label>
+                            <input type="file" class="file-upload-default">
+                            <div class="input-group col-xs-12">
+                              <input type="text" class="form-control file-upload-info" disabled placeholder="Upload File">
+                              <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
+                              </span>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label>설명</label>
+                            <textarea class="form-control" id="explain" rows="4"></textarea>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                      <button type="button" id="submit-spec" class="btn btn-primary">스펙추가요청</button>
+                  </div>
+                </div>
+            </div>
+          </div>
+
       </div>
     </div>
   </div>
+  <% include ./partials/_footer.ejs %>
 
   <script src="/public/vendors/js/vendor.bundle.base.js"></script>
   <script src="/public/vendors/js/vendor.bundle.addons.js"></script>
   <script src="/public/js/off-canvas.js"></script>
   <script src="/public/js/misc.js"></script>
+  <script src="/public/js/file-upload.js"></script>
+  <script src="/public/js/main.js"></script>
 
   <script>
-    var ctx = document.getElementById('raderChart').getContext('2d');
-    var options = {
-      scale: {
-        pointLabels: {
-          fontSize: 20,
-          fontStyle: '300',
-          fontColor: 'rgba(0, 0, 0, 1)',
-          fontFamily: "맑은 고딕, sans-serif"
-        },
-        ticks: { 
-          beginAtZero: true,
-          maxTicksLimit: 2,
-          min: 0,
-          max: 10
+    $( document ).ready(function() {
+      var ctx = document.getElementById('raderChart').getContext('2d');
+      var options = {
+        scale: {
+          pointLabels: {
+            fontSize: 20,
+            fontStyle: '300',
+            fontColor: 'rgba(0, 0, 0, 1)',
+            fontFamily: "맑은 고딕, sans-serif"
+          },
+          ticks: { 
+            beginAtZero: true,
+            maxTicksLimit: 2,
+            min: 0,
+            max: 4.5
+          }
         }
-      }
-    };
+      };
 
-    var myChart = new Chart(ctx, {
-        type: 'radar',
-        data: {
-            labels: ['코딩 개발', '수학', '팀플', '총학점', '스펙'],
-            datasets: [
-            {
+      var statsData = JSON.parse('<%- JSON.stringify(stats)%>');
+      var labels = [];
+      var datas = [];
+      $.map(statsData, function(stat) {
+        labels.push(stat.name);
+        datas.push(stat.score);
+      });
+      
+      var myChart = new Chart(ctx, {
+          type: 'radar',
+          data: {
+              labels: labels,
+              datasets: [
+              {
                 label: '점수',
-                data: [8, 6, 4, 6, 4],
+                data: datas,
                 backgroundColor: 'rgba(255, 99, 132, 1)',
                 borderColor: 'rgba(255, 99, 0, 1)',
                 fill: 1
-            }],
-        },
-        options : options
+              }],
+          },
+          options : options
+      });
+
+      
     });
   </script>
 </body>
