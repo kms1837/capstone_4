@@ -1,6 +1,5 @@
 const requestDataSetting = function (fileForm) {
     let fileInput = $(fileForm).find(".file-upload-input");
-    console.log(fileInput, fileInput[0]);
     let fileObject = fileInput[0].files[0];
     let formData = new FormData();
 
