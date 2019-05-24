@@ -1,8 +1,9 @@
 const express = require('express');
 const userModel = require('../models/user');
-const abilityCateModel = require('../models/ability_category');
-const cateEvalModel = require('../models/category_eval');
+const trackModel = require('../models/track');
+const stuSpecModel = require('../models/stu_spec');
 const finalScoreModel = require('../models/final_score');
+const common = require('./common');
 const router = express.Router();
 
 router.get('/', (request, response) => {
@@ -17,12 +18,18 @@ router.get('/add_spec', (request, response) => {
 });
 
 router.get('/info', async(request, response) => { 
+    await common.loginCheck(request, response);
+    
     let userInfo = await userModel.findToID(request.session.userID);
-    let cateInfo = await abilityCateModel.getList(); 
-    let cateEval = await cateEvalModel.findToStudentID(request.session.studentID);
+    let trackInfo = await trackModel.getList(); 
     let finalScore = await finalScoreModel.findToStudentID(request.session.studentID);
-    console.log(finalScore[0]);
-    response.render('main', {user: userInfo[0], cate: cateInfo, cateEval: cateEval, finalScore: finalScore[0]});
+    let specList = await stuSpecModel.StudentIDtoList(request.session.studentID);
+    let stats = [{"name": "코딩", "score": finalScore[0].coding}, {"name": "수학", "score": finalScore[0].math}, 
+    {"name": "팀플", "score": finalScore[0].teample}, {"name": "총학점", "score": finalScore[0].grade}, 
+    {"name": "스펙", "score": finalScore[0].spec}]
+
+    console.log(specList);    
+    response.render('main', {user: userInfo[0], track: trackInfo, finalScore: finalScore[0], stats: stats, specList: specList});
     //response.status(500).render('main');
 });
 
@@ -37,6 +44,7 @@ router.post('/login', async (request, response) => {
         request.session.studentID = studentData.studentID;
         request.session.email = studentData.email;
         request.session.name = studentData.name;
+        request.session.auth = studentData.auth;
         response.redirect("/");
     }
     else {
