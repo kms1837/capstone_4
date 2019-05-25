@@ -1,6 +1,6 @@
 CREATE TABLE user (
   id INT NOT NULL AUTO_INCREMENT,
-  studentID INT NOT NULL,
+  studentID VARCHAR(50) NULL,
   name VARCHAR(30) NULL,
   password VARCHAR(255) NULL,
   departID INT NOT NULL,
