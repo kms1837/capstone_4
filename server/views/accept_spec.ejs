@@ -25,7 +25,7 @@
           </div>
         </div>
         <br><br>
-        
+
         <div class="row">
           <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
@@ -63,8 +63,69 @@
             </div>
           </div>
         </div>
+
+        <div class="col-12 grid-margin stretch-card" id="myDIV" style="display: none;">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">학생 요청 스펙</h4>
+                  <div class="form-group">
+                      <label for="exampleSelectGender">Gender</label>
+                        <select class="form-control" id="exampleSelectGender">
+                          <option>자격증</option>
+                          <option>공모전</option>
+                          <option>인턴정보</option>
+                          <option>Topcit성적</option>
+                          <option>대회수상경력</option>
+                          <option>교육프로그램</option>
+                        </select>
+                      </div>
+                  <form class="forms-sample">
+
+                    <div class="form-group">
+                      <label>File upload</label>
+                      <input type="file" name="img[]" class="file-upload-default">
+                      <div class="input-group col-xs-12">
+                        <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image">
+                        <span class="input-group-append">
+                          <button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleTextarea1">세부사항 설명</label>
+                      <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-gradient-primary mr-2">승인</button>
+                      <button type="button" class="btn btn-Link" data-toggle="modal" data-target="#myModal1"> 거절	</button>
+                       <!-- 모달 팝업 -->
+                        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                           <div class="modal-dialog">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                   <h4 class="modal-title" id="myModalLabel">거절 사유</h4>
+                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                 </div>
+                                <div class="modal-body">
+                                           <textarea name="name" rows="8" cols="55"></textarea>
+                                 </div>
+                                     <div class="modal-footer">
+                                       <button type="button" class="btn btn-primary">거절사유 보내기</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                                     </div>
+                                  </div>
+                            </div>
+                         </div>
+                    <hr>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+
       </div>
     </div>
+
     <% include ./partials/_footer.ejs %>
 
     <div class="modal fade" id="myModalA" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
@@ -93,6 +154,7 @@
       </div>
     </div>
   </div>
+
   <script src="/public/vendors/js/vendor.bundle.base.js"></script>
   <script src="/public/vendors/js/vendor.bundle.addons.js"></script>
   <script src="/public/js/off-canvas.js"></script>
@@ -108,6 +170,17 @@
       });
     });
   });
+  </script>
+  <script type="text/javascript">
+  var bDisplay = true;
+  function doDisplay(){
+      var con = document.getElementById("myDIV");
+      if(con.style.display=='none'){
+          con.style.display = 'block';
+      }else{
+          con.style.display = 'none';
+      }
+  }
   </script>
 </body>
 

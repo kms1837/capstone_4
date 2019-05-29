@@ -17,18 +17,18 @@ router.get('/add_spec', (request, response) => {
     response.render('add_spec');
 });
 
-router.get('/info', async(request, response) => { 
+router.get('/info', async(request, response) => {
     await common.loginCheck(request, response);
-    
+
     let userInfo = await userModel.findToID(request.session.userID);
-    let trackInfo = await trackModel.getList(); 
+    let trackInfo = await trackModel.getList();
     let finalScore = await finalScoreModel.findToStudentID(request.session.studentID);
     let specList = await stuSpecModel.StudentIDtoList(request.session.studentID);
-    let stats = [{"name": "코딩", "score": finalScore[0].coding}, {"name": "수학", "score": finalScore[0].math}, 
-    {"name": "팀플", "score": finalScore[0].teample}, {"name": "총학점", "score": finalScore[0].grade}, 
+    let stats = [{"name": "코딩", "score": finalScore[0].coding}, {"name": "수학", "score": finalScore[0].math},
+    {"name": "팀플", "score": finalScore[0].teample}, {"name": "총학점", "score": finalScore[0].grade},
     {"name": "스펙", "score": finalScore[0].spec}]
 
-    console.log(specList);    
+    console.log(specList);
     response.render('main', {user: userInfo[0], track: trackInfo, finalScore: finalScore[0], stats: stats, specList: specList});
     //response.status(500).render('main');
 });
