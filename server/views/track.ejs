@@ -18,6 +18,13 @@
     <div class="container-fluid page-body-wrapper">
         <div class="content-wrapper">
           <% include ./partials/_admin-menu.ejs %>
+          <div class="input-group">
+            <input id="myInput" type="text" class="form-control" placeholder="학생 이름 조회" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-sm btn-gradient-primary" type="button">Search</button>
+            </div>
+          </div>
+          <br> <br>
           <div class="row">
             <div class="col-md-12 grid-margin">
               <div class="card">
@@ -37,7 +44,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-8 grid-margin stretch-card">
+            <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                   <div class="card-body">
@@ -65,7 +72,7 @@
                         </th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="myTable">
                       <tr>
                         <td class="py-1">
                           <img src="/public/images/faces-clipart/pic-1.png" alt="image">
@@ -213,9 +220,9 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-4 d-flex align-items-stretch">
-              <div class="row">
-                <div class="col-md-12 grid-margin stretch-card">
+
+
+                <div class="col-md-6 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
                       <h4 class="card-title">전체 학생 가상현실 평점</h4>
@@ -229,12 +236,12 @@
 
         // The data for our dataset
         data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            labels: ['가상현실 총 평점', '해당 학생 평점'],
             datasets: [{
                 label: 'My First dataset',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: [0, 10, 5, 2, 20, 30, 45]
+                data: [3.33, 4.11]
             }]
         },
 
@@ -244,7 +251,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-12 grid-margin stretch-card">
+                <div class="col-md-6 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
                           <h4 class="card-title"><%=user.name%> 가상현실 트랙(과목 성적)</h4>
@@ -253,21 +260,21 @@
                               <tr>
                                 <th>과목명</th>
                                 <th>성적</th>
-        
+
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
                                 <td>가상현실_과목1</td>
-        
+
                                 <td><label class="badge badge-danger">A+</label></td>
                               </tr>
                               <tr>
                                 <td>가상현실_과목2</td>
-        
+
                                 <td><label class="badge badge-warning">A0</label></td>
                               </tr>
-        
+
                             </tbody>
                           </table>
                         </div>
@@ -276,7 +283,6 @@
               </div>
             </div>
           </div>
-        </div>
     </div>
     <% include ./partials/_footer.ejs %>
   </div>
@@ -284,6 +290,17 @@
   <script src="/public/vendors/js/vendor.bundle.addons.js"></script>
   <script src="/public/js/off-canvas.js"></script>
   <script src="/public/js/misc.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script>
+  $(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+  </script>
 </body>
 
 </html>
