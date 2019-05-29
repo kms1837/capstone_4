@@ -29,7 +29,7 @@ import pymysql
 # 데이터 베이스에 접속하는 함수
 def get_connection() :
     conn = pymysql.connect(host='127.0.0.1', user='root',
-            password='dnrkim5823', db='capstone', charset='utf8')
+            password='6301rkwo', db='capstone', charset='utf8')
 
     return conn
 
@@ -50,28 +50,14 @@ def add_user(studentID, name, password, departID, email, auth) :
     conn.commit()
     conn.close()
 
-# 과목 저장
-def add_subject(majorname, subjectnumber, name, trackID) :
-    # 쿼리문
-    sql = '''insert into user
-             (subjectnumber, name, tackID) values (%s, %s, %s)'''
+class_number['studentID'] = class_number.index
 
-    # 접속
-    conn = get_connection()
-    # 쿼리실행
-    cursor = conn.cursor()
-    cursor.execute(sql, (subjectnumber, name, trackID))
 
-    # 접속해제
-    conn.commit()
-    conn.close()
-
-get_connection()
 k=0
 for i in class_number.index :
     a = class_number['departID'][k]
     a = int(a)
-    add_user(k, class_number['class_number_x'][k], '1234', a, 'capstone', False )
+    add_user(class_number['class_number_x'][k], '이인섭', '1234', a, 'capstone', False )
     k= k+1
 
 
@@ -100,7 +86,12 @@ def add_subject(subjectnumber, name, trackID) :
     conn.commit()
     conn.close()
 
-get_connection()
+track_1['trackID'] = track_1['trackID'].fillna(0)
+track_1['교과목번호'] = track_1['교과목번호'].fillna(-1)
+for i in track_1.index :
+    a = track_1['trackID'][i]
+    a = int(a)
+    add_subject(track_1['교과목번호'][i], track_1['subject_name'][i], a)
 
 def add_track(id, name, track_explain) :
     # 쿼리문
@@ -131,16 +122,16 @@ add_track(9, '사이버국방', '사이버국방')
 add_track(10, 'HCI&비쥬얼컴퓨팅', 'HCI&비쥬얼컴퓨팅')
 
 
-def add_score(studentID, majorid, score, grade) :
+def add_score(studentID, subjectid, score, grade) :
     # 쿼리문
     sql = '''insert into score
-             (studentID, majorid, score, grade) values (%s, %s, %s, %s)'''
+             (studentID, subjectid, score, grade) values (%s, %s, %s, %s)'''
 
     # 접속
     conn = get_connection()
     # 쿼리실행
     cursor = conn.cursor()
-    cursor.execute(sql, (studentID, majorid, score, grade))
+    cursor.execute(sql, (studentID, subjectid, score, grade))
 
     # 접속해제
     conn.commit()
@@ -156,18 +147,25 @@ for i in df.index :
 
 final_score = pd.read_csv('../node/data/등급분류완료.csv')
 
+del class_number['소속']
+del class_number['class_number_y']
+del class_number['departID']
+final_score = pd.merge(final_score, class_number, left_on = 'class_number', right_on = 'class_number_x' ,how= 'left')
+
 import datetime
 
-def add_final(name, coding, teample, spec, grade, math, final_grade, check_date) :
+
+
+def add_final(studentID, coding, teample, spec, grade, math, final_grade, check_date) :
     # 쿼리문
     sql = '''insert into final_score
-             (name, coding, teample, spec, grade, math, final_grade, check_date) values (%s, %s, %s, %s, %s, %s, %s, %s)'''
+             (studentID, coding, teample, spec, grade, math, final_grade, check_date) values (%s, %s, %s, %s, %s, %s, %s, %s)'''
 
     # 접속
     conn = get_connection()
     # 쿼리실행
     cursor = conn.cursor()
-    cursor.execute(sql, (name, coding, teample, spec, grade, math, final_grade, check_date))
+    cursor.execute(sql, (studentID, coding, teample, spec, grade, math, final_grade, check_date))
 
     # 접속해제
     conn.commit()
@@ -202,7 +200,7 @@ def add_student_track() :
              (studentID, trackID, track_score)
              select x.studentID, y.trackID, avg(x.score)
              from score x, subject y
-             where x.majorid = y.id
+             where x.subjectId = y.id
              group by x.studentID, y.trackID;'''
 
     # 접속
