@@ -35,7 +35,7 @@ $(document).ready(function(){
           cancelButtonText: '취소',
           showCancelButton: true
         })
-        .then((result) => {
+        .then( result => {
           if (result.value) {
             $.ajax({
               type: "PUT",

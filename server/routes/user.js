@@ -54,4 +54,19 @@ router.get('/logout', (request, response) => {
     response.redirect('/');
 });
 
+router.get('/professor_opinion/:userID', async(request, response) => {
+    let data = await finalScoreModel.getProfessorOpinion(request.params.userID);
+    if (data.length > 0) {
+      response.status(200).json(data[0]);
+    } else {
+      response.status(500).json(false);
+    }
+});
+
+router.put('/professor_opinion/:userID', async(request, response) => {
+    let userData = request.body;
+    await finalScoreModel.setProfessorOpinion(request.params.userID, userData.opinion);
+    response.status(200).send(true);
+});
+
 module.exports = router;

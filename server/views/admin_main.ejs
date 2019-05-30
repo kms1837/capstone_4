@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="/public/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="/public/vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="/sweetalert2/dist/sweetalert2.min.css">
   <link rel="stylesheet" href="/public/css/style.css">
   <link rel="shortcut icon" href="/public/images/favicon.png" />
   <link rel="stylesheet" href="/public/css/main.css">
@@ -52,9 +53,6 @@
                           SW역량등급
                         </th>
                         <th>
-                          카테고리 역량조회
-                        </th>
-                        <th>
                           관리자 의견등록
                         </th>
                         <th>
@@ -64,7 +62,7 @@
                     </thead>
                     <tbody id="myTable">
                     <% for(var i=0; i<students.length; i++) { %>
-                      <tr>
+                      <tr data-id="<%= students[i].studentID %>">
                         <td class="py-1"><img src="/public/images/faces-clipart/pic-1.png" alt="image"></td>
                         <td><%= students[i].name %></td>
                         <td><%= students[i].studentID %></td>
@@ -88,9 +86,8 @@
                             <label class="btn btn-primary btn-sm"><%= students[i].final_grade%></label>
                           <% } %>
                         </td>
-                        <td><%= students[i].studentID %></td>
-                        <td><button type="button" class="btn btn-Link" data-toggle="modal" data-target="#myModal1" > 관리자 의견등록 </button></td>
-                        <td><button type="button" class="btn btn-Link" data-toggle="modal" data-target="#myModalaa" > 관리자 의견조회	</button></td>
+                        <td><button class="btn btn-Link record">의견등록</button></td>
+                        <td><button class="btn btn-Link lookup">의견조회</button></td>
                       </tr>
                     <% } %>
                     </tbody>
@@ -104,65 +101,16 @@
         </div>
       </div>
 
-
-
-       <!-- 관리자 의견등록 팝업 -->
-        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-           <div class="modal-dialog">
-              <div class="modal-content">
-                 <div class="modal-header">
-                   <h4 class="modal-title" id="myModalLabel">관리자 의견</h4>
-                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                 </div>
-                <div class="modal-body">
-                           <textarea name="name" rows="8" cols="63"></textarea>
-                 </div>
-                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                     </div>
-                  </div>
-            </div>
-         </div>
-
-
-
-       <!-- 관리자 의견조회 팝업 -->
-        <div class="modal fade" id="myModalaa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-           <div class="modal-dialog">
-              <div class="modal-content">
-                 <div class="modal-header">
-                   <h4 class="modal-title" id="myModalLabel">S01학생에 대한 의견</h4>
-                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                 </div>
-                <div class="modal-body">
-                            aaa
-                 </div>
-                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                     </div>
-                  </div>
-            </div>
-         </div>
       <% include ./partials/_footer.ejs %>
-
   </div>
+
   <script src="/public/vendors/js/vendor.bundle.base.js"></script>
   <script src="/public/vendors/js/vendor.bundle.addons.js"></script>
   <script src="/public/js/off-canvas.js"></script>
   <script src="/public/js/misc.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  <script>
-  $(document).ready(function(){
-    $("#myInput").on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $("#myTable tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-      });
-    });
-  });
-  </script>
+  <script src="/sweetalert2/dist/sweetalert2.min.js"></script>
+  <script src="/public/js/admin_main.js"></script>
 </body>
 
 </html>
