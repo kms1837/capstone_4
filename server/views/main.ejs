@@ -23,7 +23,7 @@
               <div class="card">
                 <div class="card-body">
                   <div class="profile text-center">
-                    <img src="/public/images/faces/face1.jpg" class="faceimg" alt="image">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNsrG38DwAFhgKAAHh4EQAAAABJRU5ErkJggg==" class="faceimg" alt="image">
                     <h1><%= user.name %></h1>
                   </div>
 
@@ -38,7 +38,7 @@
                   <% } %>
                 </div>
 
-                <div class="card-footer bg-gradient-danger card-img-holder text-white">
+                <div class="card-footer bg-<%= gradeToBgColor(finalScore.final_grade) %> card-img-holder text-white">
                   <div class="row justify-content-center">
                     <h1 class="text-center"><%= finalScore.final_grade %></h1>
                   </div>
@@ -50,7 +50,7 @@
                 <div class="card-body">
                   <canvas id="raderChart" style="height:230px"></canvas>
                   <div class="col-md-12 text-center">
-                    <button class="btn btn-gradient-info btn-rounded btn-icon" id="graphTooltip">
+                    <button class="btn btn-inverse-dark btn-icon" id="graphTooltip">
                       <i class="mdi mdi-comment-question-outline"></i>
                     </button>
                   </div>
@@ -82,19 +82,26 @@
                   <h2 class="card-title">Card title</h2>
                   <div class="row justify-content-between">
                     <div class="col-md-6">
-                      <canvas id="barChart" style="height:500px"></canvas>
+                      <canvas id="barChart" style="height:600px"></canvas>
                     </div>
                     <div class="col-md-4">
-                      <table class="table table-striped table-score">
-                          <thead>
-                            <tr>
-                              <th>과목명</th>
-                              <th>성적</th>
-                            </tr>
-                          </thead>
-                          <tbody id="myTable">
-                          </tbody>
-                        </table>
+                      <table class="table table-bordered table-score mb-4">
+                        <thead>
+                          <tr>
+                            <th>과목명</th>
+                            <th class="text-center">성적</th>
+                          </tr>
+                        </thead>
+                        <tbody id="myTable">
+                        </tbody>
+                      </table>
+
+                      <div class="card bg-dark">
+                        <div class="card-body text-white trackScoreCard">
+                          <h4 id="trackScoreTitle">트랙 이수까지</h4>
+                          <h1 id="trackScore" class="text-right">0/18</h1>
+                        </div>
+                      </div>
                     </div>
                   </div>
               </div>
@@ -111,7 +118,9 @@
                   <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
               </div>
               <div class="modal-body">
-                  <table class="table table-striped">
+                <div class="card">
+                  <div class="card-body">
+                    <table class="table table-striped">
                       <thead>
                         <tr>
                           <th>스펙명</th>
@@ -119,24 +128,41 @@
                           <th>점수</th>
                           <th>파일</th>
                           <th>설명</th>
+                          <th>결과</th>
                           <th>요청날짜</th>
                           <th>승인날짜</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <% for(var i=0; i<specList.length; i++) { %>
-                          <tr>
-                            <td><%= specList[i].name %></td>
-                            <td><%= specList[i].spec_typeID %></td>
-                            <td><%= specList[i].score %></td>
-                            <td><a target="_blank" class="btn btn-default" href="/uploads/<%= specList[i].path %>">파일보기</a></td>
-                            <td><%= specList[i].spec_explain %></td>
-                            <td><%= specList[i].request_date %></td>
-                            <td><%= specList[i].agree_date %></td>
-                          </tr>
-                        <% } %>
-                        </tbody>
+                      <% for(var i=0; i<specList.length; i++) { %>
+                        <tr>
+                          <td><%= specList[i].name %></td>
+                          <td><%= specList[i].spec_typeID %></td>
+                          <td><%= specList[i].score %></td>
+                          <td>
+                            <a target="_blank" class="btn btn-Link" href="/uploads/<%= specList[i].path %>">
+                              <i class="mdi mdi-file-document"></i>
+                              파일보기
+                            </a>
+                          </td>
+                          <td><%= specList[i].spec_explain %></td>
+                          <td>
+                            <% if(specList[i].regist_agree && specList[i].request_date) { %>
+                              <label class="badge badge-success">승인</label>
+                            <% } else if(!specList[i].regist_agree && specList[i].agree_date) { %>
+                              <label class="badge badge-danger">거절</label>
+                            <% } else { %>
+                              <label class="badge badge-dark">승인대기</label>
+                            <% } %>
+                          </td>
+                          <td><%= specList[i].request_date %></td>
+                          <td><%= specList[i].agree_date %></td>
+                        </tr>
+                      <% } %>
+                      </tbody>
                     </table>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -245,10 +271,9 @@
               datasets: [
               {
                 label: '점수',
-                data: datas,
-                backgroundColor: 'rgba(255, 99, 132, 1)',
-                borderColor: 'rgba(255, 99, 0, 1)',
-                fill: 1
+                backgroundColor: 'rgba(0, 99, 255, 0.5)',
+                borderColor: 'rgba(0, 99, 255, 1)',
+                data: datas
               }],
           },
           options : options

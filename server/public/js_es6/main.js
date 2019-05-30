@@ -51,18 +51,37 @@ $( document ).ready(() => {
         },
         title: {
             display: true,
-            text: 'Chart.js Line Chart - Legend'
+            text: '트랙점수 비교'
         }
       };
 
       $.get(`/ability/current_track_Info/${trackID}`, data => {
-        $.map(data.trackScore, item => {
+        let trackScoreCard = $('.trackScoreCard');
+        let trackScore = data.trackScore.length*3;
+
+        trackScoreCard.find('#trackScoreTitle').text(`${title} 트랙 이수 까지`);
+        trackScoreCard.find('#trackScore').text(`${trackScore} / 18`);
+
+        if (data.trackScore.length > 0) {
+          $.map(data.trackScore, item => {
+            tableBody.append(`
+            <tr>
+              <td>${item.name}</td>
+              <td class="text-center"><label class="badge badge-info">${item.grade}</label></td>        
+            </tr>`);
+          });
+
+        } else {
           tableBody.append(`
-          <tr>
-            <td>${item.name}</td>
-            <td>${item.grade}</td>        
-          </tr>`);
-        });
+            <tr>
+              <td colspan="2">
+                <div class="text-center">
+                  <i class="mdi mdi-comment-question-outline"></i>
+                  아직 이수한 과목이 없습니다.
+                </div>
+              </td>      
+            </tr>`);
+        }
 
         if (barChart!=null) {
           barChart.destroy();
@@ -76,8 +95,7 @@ $( document ).ready(() => {
             {
               label: '트랙 평균',
               data: [data.trackAvg, data.totalAvg],
-              backgroundColor: 'rgba(255, 99, 132, 1)',
-              borderColor: 'rgba(255, 99, 0, 1)',
+              backgroundColor: "rgba(0, 99, 255, 0.5)",
               fill: 1
             }],
           },
@@ -108,7 +126,10 @@ $('#submit-spec').click(() => {
       type: 'POST',
       success: response => {
         addSpecModel.modal('hide');
-        Swal.fire({type: 'success', title:'스펙추가 요청성공'});
+        Swal.fire({type: 'success', title:'스펙추가 요청성공'})
+        .then(()=> {
+          location.reload();
+        });
       }
     });
   });

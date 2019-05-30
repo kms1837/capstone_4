@@ -28,8 +28,33 @@ router.get('/info', async(request, response) => {
     {"name": "TEAMPLE", "score": finalScore[0].teample}, {"name": "GRADE", "score": finalScore[0].grade},
     {"name": "SPEC", "score": finalScore[0].spec}]
 
-    console.log(specList);
-    response.render('main', {user: userInfo[0], track: trackInfo, finalScore: finalScore[0], stats: stats, specList: specList});
+    response.render('main', 
+        {user: userInfo[0], track: trackInfo, finalScore: finalScore[0], stats: stats, specList: specList,
+        gradeToBgColor: grade => {
+            let bgColor = "";
+            switch (grade) {
+                case "Challenger":
+                    bgColor = "gradient-primary";
+                    break;
+                case "Dia":
+                    bgColor = "gradient-Info";
+                    break;
+                case "Platinum":
+                    bgColor = "gradient-success";
+                    break;
+                case "Gold":
+                    bgColor = "gradient-warning";
+                    break;
+                case "Silver":
+                    bgColor = "secondary";
+                    break;
+                case "Bronze":
+                    bgColor = "danger";
+                    break;
+            }
+
+            return bgColor;
+        }});
 });
 
 router.post('/login', async (request, response) => {
