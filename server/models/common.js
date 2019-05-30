@@ -62,6 +62,28 @@ module.exports = {
         }
     },
 
+    async update(tableName, updateColumn, target, ...items) {
+        try {
+            const connection = await database.getConnection(async conn=>conn);
+            try {
+                let sql = `UPDATE ${tableName} SET ${updateColumn} WHERE ${target}`;
+                const [row] = await connection.query(sql, items);
+                connection.release();
+                return row[0];
+            }
+            catch(err) {
+                await connection.rollback();
+                connection.release();
+                console.log('Query Error!');
+                return false;
+            } 
+        }
+        catch(err) {
+            console.log('DB ERROR!');
+            return false;
+        }
+    },
+
     async delete(tableName, option, ...items) {
         try {
             const connection = await database.getConnection(async conn=>conn);

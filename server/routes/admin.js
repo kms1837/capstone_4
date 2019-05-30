@@ -2,6 +2,7 @@ const express = require('express');
 const userModel = require('../models/user');
 const trackModel = require('../models/track');
 const stuSpecModel = require('../models/stu_spec');
+const finalScoreModel = require('../models/final_score');
 const common = require('./common');
 const router = express.Router();
 
@@ -43,6 +44,22 @@ router.get('/accept_spec', async(request, response) => {
     let specReqList = await stuSpecModel.getList();
     console.log(specReqList);
     response.render('accept_spec.ejs', {user: userData[0], specReqList: specReqList});
+});
+
+router.put('/professor_opinion/:userID', async(request, response) => {
+    let userData = request.body;
+    await finalScoreModel.setProfessorOpinion(request.params.userID, userData.opinion);
+    response.status(200).send(true);
+});
+
+router.get('/professor_opinion/:userID', async(request, response) => {
+    let data = await finalScoreModel.getProfessorOpinion(request.params.userID);
+    if (data.length > 0) {
+      response.status(200).json(data[0]);
+    } else {
+      response.status(500).json(false);
+    }
+    
 });
 
 module.exports = router;
