@@ -61,5 +61,11 @@ router.get('/stu_spec', (request, response) => {
   });
 });
 
+router.get('/stu_spec/:specID', async(request, response) => {
+  // 관리자 인증 필요
+  let specInfo = await stuSpecModel.findToID(request.params.specID);
+  response.json(specInfo[0]);
+});
+
 
 module.exports = router;

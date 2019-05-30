@@ -41,9 +41,19 @@ router.get('/accept_waiting', async(request, response) => {
 router.get('/accept_spec', async(request, response) => {
     await common.loginCheck(request, response);
     let userData = await userModel.findToID(request.session.userID);
-    let specReqList = await stuSpecModel.getList();
-    console.log(specReqList);
+    let specReqList = await stuSpecModel.acceptWaitingList();
+
     response.render('accept_spec.ejs', {user: userData[0], specReqList: specReqList});
+});
+
+router.put('/accept_spec/:specID/agree', async(request, response) => {
+    await stuSpecModel.agree(request.params.specID);
+    response.status(200).send(true);
+});
+
+router.put('/accept_spec/:specID/reject', async(request, response) => {
+    await stuSpecModel.reject(request.params.specID);
+    response.status(200).send(true);
 });
 
 router.put('/professor_opinion/:userID', async(request, response) => {
