@@ -33,8 +33,8 @@ def user_data_load(stdeuntID) :
 
     return result
 
-a = user_data_load('s1')
-
+a = input('업데이트할 아이디 : ')
+a = user_data_load(a)
 print("업데이트중...")
 
 df_raw = pd.read_csv('../node/data/sw_grade.csv', index_col = 'class_number')
