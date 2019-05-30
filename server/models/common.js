@@ -1,11 +1,11 @@
 const database = require('../config/database');
 
 module.exports = {
-    async select(tableName, option, ...items) {
+    async columnSelect(tableName, column, option, ...items) {
         try {
             const connection = await database.getConnection(async conn=>conn);
             try {
-                let sql = `SELECT * FROM ${tableName} ${option}`;
+                let sql = `SELECT ${column} FROM ${tableName} ${option}`;
                 const [row] = await connection.query(sql, items);
                 connection.release();
                 return row;
@@ -21,6 +21,10 @@ module.exports = {
             console.log('DB ERROR!');
             return false;
         }
+    },
+
+    async select(tableName, option, ...items) {
+        return this.columnSelect(tableName, '*', option, ...items);
     },
 
     async findToOption(tableName, option, ...items) {
