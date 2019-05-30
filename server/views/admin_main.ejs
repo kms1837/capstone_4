@@ -49,32 +49,48 @@
                           학번
                         </th>
                         <th>
-                          총 평점
-                        </th>
-                        <th>
                           SW역량등급
                         </th>
                         <th>
                           카테고리 역량조회
                         </th>
                         <th>
-                          교수 의견등록
+                          관리자 의견등록
                         </th>
                         <th>
-                          교수 의견조회
+                          관리자 의견조회
                         </th>
                       </tr>
                     </thead>
                     <tbody id="myTable">
                     <% for(var i=0; i<students.length; i++) { %>
                       <tr>
-                        <td><%= (i+1) %></td>
+                        <td class="py-1"><img src="/public/images/faces-clipart/pic-1.png" alt="image"></td>
                         <td><%= students[i].name %></td>
                         <td><%= students[i].studentID %></td>
+                        <td>
+                          <% if(students[i].final_grade=="Silver"){ %>
+                            <label class="btn btn-secondary btn-sm"><%= students[i].final_grade%></label>
+                          <% } %>
+                          <% if(students[i].final_grade=="Gold"){ %>
+                            <label class="btn btn-warning btn-sm"><%= students[i].final_grade%></label>
+                          <% } %>
+                          <% if(students[i].final_grade=="Platinum"){ %>
+                            <label class="btn btn-success btn-sm"><%= students[i].final_grade%></label>
+                          <% } %>
+                          <% if(students[i].final_grade=="Bronze"){ %>
+                            <label class="btn btn-danger btn-sm"><%= students[i].final_grade%></label>
+                          <% } %>
+                          <% if(students[i].final_grade=="Dia"){ %>
+                            <label class="btn btn-Info btn-sm"><%= students[i].final_grade%></label>
+                          <% } %>
+                          <% if(students[i].final_grade=="Challenger"){ %>
+                            <label class="btn btn-primary btn-sm"><%= students[i].final_grade%></label>
+                          <% } %>
+                        </td>
                         <td><%= students[i].studentID %></td>
                         <td><%= students[i].studentID %></td>
-                        <td><%= students[i].studentID %></td>
-                        <td><%= students[i].studentID %></td>
+                        <td><%= students[i].professor %></td>
                       </tr>
                     <% } %>
                     </tbody>
@@ -87,7 +103,50 @@
           </div>
         </div>
       </div>
+
+
+      <button type="button" class="btn btn-Link" data-toggle="modal" data-target="#myModal1" > 관리자 의견등록 </button>
+       <!-- 관리자 의견등록 팝업 -->
+        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+           <div class="modal-dialog">
+              <div class="modal-content">
+                 <div class="modal-header">
+                   <h4 class="modal-title" id="myModalLabel">관리자 의견</h4>
+                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                 </div>
+                <div class="modal-body">
+                           <textarea name="name" rows="8" cols="63"></textarea>
+                 </div>
+                     <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                     </div>
+                  </div>
+            </div>
+         </div>
+
+
+      <button type="button" class="btn btn-Link" data-toggle="modal" data-target="#myModalaa" > 관리자 의견조회	</button>
+       <!-- 관리자 의견조회 팝업 -->
+        <div class="modal fade" id="myModalaa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+           <div class="modal-dialog">
+              <div class="modal-content">
+                 <div class="modal-header">
+                   <h4 class="modal-title" id="myModalLabel">S01학생에 대한 의견</h4>
+                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                 </div>
+                <div class="modal-body">
+                            aaa
+                 </div>
+                     <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                     </div>
+                  </div>
+            </div>
+         </div>
       <% include ./partials/_footer.ejs %>
+
   </div>
   <script src="/public/vendors/js/vendor.bundle.base.js"></script>
   <script src="/public/vendors/js/vendor.bundle.addons.js"></script>

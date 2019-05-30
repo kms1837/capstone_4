@@ -9,4 +9,5 @@ module.exports = {
     getList() {
         return common.getList(tableName);
     }
+  
 }
