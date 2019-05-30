@@ -74,7 +74,7 @@ module.exports = {
             catch(err) {
                 await connection.rollback();
                 connection.release();
-                console.log('Query Error!');
+                console.log('Query Error!', err);
                 return false;
             } 
         }
