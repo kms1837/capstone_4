@@ -3,6 +3,7 @@ const school = require('./school');
 const ability = require('./ability');
 const file = require('./file');
 const admin = require('./admin');
+const common = require('./common');
 
 module.exports = function (server) {
     server.use('/user', user);
@@ -23,8 +24,12 @@ module.exports = function (server) {
         }
     });
 
-    server.get('/login', (request, response) => {
-        response.render('login');
+    server.get('/login', async(request, response) => {
+      if (request.session.name) {
+        response.redirect('/');
+      } else {
+        response.render('login', {error: request.query.error});
+      }
     });
 
     server.get('/about', (request, response) => {
