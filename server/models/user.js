@@ -18,5 +18,5 @@ module.exports = {
 
     getScoreList() {
         return common.select(tableName, 'JOIN final_score ON user.studentID=final_score.studentID limit 100',[]);
-    }
+    } // 트랙 JOIN
 };

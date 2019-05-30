@@ -1,5 +1,6 @@
 const express = require('express');
 const userModel = require('../models/user');
+const trackModel = require('../models/track');
 const stuSpecModel = require('../models/stu_spec');
 const common = require('./common');
 const router = express.Router();
@@ -26,7 +27,8 @@ router.get('/weight', async(request, response) => {
 router.get('/track', async(request, response) => {
     await common.loginCheck(request, response);
     let userData = await userModel.findToID(request.session.userID);
-    response.render('track.ejs', {user: userData[0]});
+    let students = await userModel.getScoreList();
+    response.render('track.ejs', {user: userData[0], students: students});
 });
 
 router.get('/accept_waiting', async(request, response) => {
