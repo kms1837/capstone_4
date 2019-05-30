@@ -26,4 +26,12 @@ module.exports = function (server) {
     server.get('/login', (request, response) => {
         response.render('login');
     });
+
+    server.get('/about', (request, response) => {
+        response.render('about');
+    }); // 소개
+
+    server.get('/contact-us', (request, response) => {
+        response.render('contact_us');
+    }); // 문의
 }
