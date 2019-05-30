@@ -17,7 +17,7 @@
     <% include ./partials/_navbar.ejs %>
     <div class="container-fluid page-body-wrapper">
       <div class="content-wrapper">
-          <% include ./partials/_admin-mdenu.ejs %>
+          <% include ./partials/_admin-menu.ejs %>
 
           <div class="input-group">
             <input id = "myInput" type="text" class="form-control" placeholder="학생 이름 조회" aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -89,8 +89,8 @@
                           <% } %>
                         </td>
                         <td><%= students[i].studentID %></td>
-                        <td><%= students[i].studentID %></td>
-                        <td><%= students[i].professor %></td>
+                        <td><button type="button" class="btn btn-Link" data-toggle="modal" data-target="#myModal1" > 관리자 의견등록 </button></td>
+                        <td><button type="button" class="btn btn-Link" data-toggle="modal" data-target="#myModalaa" > 관리자 의견조회	</button></td>
                       </tr>
                     <% } %>
                     </tbody>
@@ -105,7 +105,7 @@
       </div>
 
 
-      <button type="button" class="btn btn-Link" data-toggle="modal" data-target="#myModal1" > 관리자 의견등록 </button>
+
        <!-- 관리자 의견등록 팝업 -->
         <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
            <div class="modal-dialog">
@@ -126,7 +126,7 @@
          </div>
 
 
-      <button type="button" class="btn btn-Link" data-toggle="modal" data-target="#myModalaa" > 관리자 의견조회	</button>
+
        <!-- 관리자 의견조회 팝업 -->
         <div class="modal fade" id="myModalaa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
            <div class="modal-dialog">
