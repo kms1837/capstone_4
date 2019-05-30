@@ -8,6 +8,6 @@ create table stu_spec (
     spec_explain varchar(255) not null,
     fileID int not null,
     request_date Date not null,
-    agree_date Date not null,
+    agree_date Date DEFAULT null,
     primary key(id, student_id)
 );
