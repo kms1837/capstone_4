@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/public/css/style.css">
   <link rel="shortcut icon" href="/public/images/favicon.png" />
   <link rel="stylesheet" href="/public/css/main.css">
+  <link rel="stylesheet" href="/sweetalert2/dist/sweetalert2.min.css">
 </head>
 
 <body>
@@ -21,15 +22,25 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-body">
-                도와드릴수 있는 일이 있습니까?
+                <h2 class="text-center">궁금하신 사항이 있습니까?</h2>
+                <h4 class="text-center">궁금하신 사항은 아래에 입력하시고 보내주시면 메일로 답변해드리겠습니다.<br>서비스를 이용해 주셔서 감사합니다.</h4>
+                <div class="help-call">
+                  <div class="form-group">
+                      <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="이름">
+                      <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="이메일">
+                  </div>
+                  <div class="form-group">
+                    <textarea class="form-control" id="exampleTextarea1" rows="30"></textarea>
+                  </div>
+                  <button class="btn btn-block">보내기</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
     </div>
   </div>
-  <% include ./partials/_footer.ejs %>
-
+  <% include ./partials/_footer.ejs %> 
 </body>
 
 </html>
