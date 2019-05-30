@@ -24,32 +24,28 @@ router.get('/info', async(request, response) => {
     let trackInfo = await trackModel.getList();
     let finalScore = await finalScoreModel.findToStudentID(request.session.studentID);
     let specList = await stuSpecModel.StudentIDtoList(request.session.studentID);
-    let stats = [{"name": "코딩", "score": finalScore[0].coding}, {"name": "수학", "score": finalScore[0].math},
-    {"name": "팀플", "score": finalScore[0].teample}, {"name": "총학점", "score": finalScore[0].grade},
-    {"name": "스펙", "score": finalScore[0].spec}]
+    let stats = [{"name": "CODING", "score": finalScore[0].coding}, {"name": "MATH", "score": finalScore[0].math},
+    {"name": "TEAMPLE", "score": finalScore[0].teample}, {"name": "GRADE", "score": finalScore[0].grade},
+    {"name": "SPEC", "score": finalScore[0].spec}]
 
     console.log(specList);
     response.render('main', {user: userInfo[0], track: trackInfo, finalScore: finalScore[0], stats: stats, specList: specList});
-    //response.status(500).render('main');
 });
 
 router.post('/login', async (request, response) => {
     let userData = request.body;
     let res = await userModel.findToStudentID(userData.studentID);
-
-    if (res && res[0].password === res[0].password) {
+    
+    if (res.length > 0 && userData.password === res[0].password) {
         let studentData = res[0];
-        console.log(`login ${studentData.name}, ${studentData.studentID}`);
         request.session.userID = studentData.id;
         request.session.studentID = studentData.studentID;
         request.session.email = studentData.email;
         request.session.name = studentData.name;
         request.session.auth = studentData.auth;
-        response.redirect("/");
+        response.status(200).send(true);
     }
-    else {
-        response.redirect("/login");
-    }
+    response.status(500).send(false);
 });
 
 router.get('/logout', (request, response) => {

@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
         <link rel="stylesheet" href="/public/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="/public/vendors/css/vendor.bundle.base.css">
+        <link rel="stylesheet" href="/sweetalert2/dist/sweetalert2.min.css">
         <link rel="stylesheet" href="/public/css/style.css">
         <link rel="stylesheet" href="/public/css/login.css">
     </head>
@@ -16,29 +17,37 @@
                 <article class="login">
                     <div class="login-form">
                         <h3 class="login-title">소프트웨어 역량평가 시스템</h3>
-                        <form action="/user/login" method="post">
+                        <form method="post">
                             <div class="form-group">
                                 <input type="text" class="form-control" name="studentID" id="studentID" placeholder="학번">
                                 <input type="password" class="form-control" name="password" id="password" placeholder="비밀번호">
                             </div>
                             <div class="form-group login-btns">
-                                <input type="submit" class="btn btn-success" value="로그인"></input>    
+                                <button class="btn btn-success" id="submit">로그인</button>    
                             </div>
                             <div class="form-group login-btns">
-                                <a href="/">비밀번호를 잊어버리셨나요?</a>    
+                                <a id="account-reset" href="#">비밀번호를 잊어버리셨나요?</a>    
                             </div>
+                            <p id="error" class="text-center"></p>
                         </form> 
                     </div>
 
                     <div class="app-links">
                         <p>앱을 다운로드 하세요</p>
-                        <button class="btn">앱 스토어</button>
+                        <button id="apple" class="btn btn-outline-dark btn-icon-text">
+                            <i class="mdi mdi-apple btn-icon-prepend mdi-36px"></i>
+                            <span class="d-inline-block text-left">
+                                <small class="font-weight-light d-block">Available on the</small>
+                                App Store
+                            </span>
+                        </button>
                     </div>
                 </article>
             </section>
-            <footer>
-                © Capstone_4
-            </footer>
         </div>
+      <script src="/public/vendors/js/vendor.bundle.base.js"></script>
+      <script src="/public/vendors/js/vendor.bundle.addons.js"></script>
+      <script src="/sweetalert2/dist/sweetalert2.min.js"></script>
+      <script src="/public/js/login.js"></script>
     </body>
 </html>
