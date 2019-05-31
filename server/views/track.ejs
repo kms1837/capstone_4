@@ -28,19 +28,10 @@
           <div class="row">
             <div class="col-md-12 grid-margin">
               <div class="card">
-                <div class="card-body">
-                    <div class="template-demo">
-                        <a href="javascript:f_track1();"  class="btn btn-inverse-primary btn-fw">가상현실</a>
-                        <a href="#" class="btn btn-inverse-primary btn-fw">사물인터넷</a>
-                        <a href="#" class="btn btn-inverse-primary btn-fw">사이버국방</a>
-                        <a href="#" class="btn btn-inverse-primary btn-fw">시스템운용</a>
-                        <a href="#" class="btn btn-inverse-primary btn-fw">DataScience</a>
-                        <a href="#" class="btn btn-inverse-primary btn-fw">멀티미디어</a>
-                        <a href="#" class="btn btn-inverse-primary btn-fw">인공지능</a>
-                        <a href="#" class="btn btn-inverse-primary btn-fw">정보보호</a>
-                        <a href="#" class="btn btn-inverse-primary btn-fw">HCI비쥬얼</a>
-                        <a href="#" class="btn btn-inverse-primary btn-fw">SW교육</a>
-                    </div>
+                <div class="card-body text-center">
+                  <% for(var i=0; i < track.length; i++) { %>
+                    <a class="btn btn-outline-info btn-fw" href="/admin/track/<%= track[i].id%>"><%= track[i].name %></a>
+                  <% } %>
                 </div>
               </div>
             </div>

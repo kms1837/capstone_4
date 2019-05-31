@@ -8,5 +8,9 @@ module.exports = {
 
   getTrackAvg(trackID) {
     return common.columnSelect(tableName, 'avg(track_score)', 'where trackID=?', trackID);
+  },
+
+  getTrackIDtoList(trackID) {
+    return common.select(tableName, `JOIN user ON ${tableName}.studentID=user.studentID WHERE trackID=?`, trackID);
   }
 }
