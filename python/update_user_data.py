@@ -25,8 +25,8 @@ def get_connection() :
 
 def user_data_load(stdeuntID) :
     # 쿼리문
-    sql = '''SELECT coding, teample, spec, grade, math, studentID
-             FROM final_score
+    sql = '''select coding, teample, spec, grade, math, studentID
+             from final_score
              where studentID = %s'''
 
     # 접속
