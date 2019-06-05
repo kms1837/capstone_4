@@ -37,16 +37,30 @@ router.get('/current_track_Info/:trackID', async(request, response) => {
   });
 });
 
+router.get('/current_track_Info/:trackID/:studentID', async(request, response) => {
+  // 관리자 인증 필요
+  let trackScoreAvg = await studentTrackModel.getStudentTrackInfo(request.params.studentID, request.params.trackID);
+  let trackScore = await scoreModel.studentTrackScore(request.params.studentID, request.params.trackID);
+  let totalTrackAvg = await studentTrackModel.getTrackAvg(request.params.trackID);
+  let trackAvg = trackScoreAvg.length > 0 ? trackScoreAvg[0].track_score : 0;
+
+  response.json({
+    'totalAvg': totalTrackAvg[0]['avg(track_score)'],
+    'trackAvg': trackAvg,
+    'trackScore': trackScore 
+  });
+});
+
 router.get('/track_score/:trackID', async(request, response) => {
   let trackScore = await scoreModel.studentTrackScore(request.session.studentID, request.params.trackID);
   response.json(trackScore);
 }); //해당 트랙의 성적들을 모두 가져옵니다.
 
-router.get('/track_score/:studentID/:trackID', async(request, response) => {
+router.get('/track_score/:trackID/:studentID', async(request, response) => {
   // 관리자 인증 필요
   let trackScore = await scoreModel.studentTrackScore(request.params.studentID, request.params.trackID);
   response.json(trackScore);
-});
+}); //해당 학생의 트랙성적을 가져옵니다.
 
 router.post('/stu_spec', async(request, response) => {
   let fileID = await fileModel.upload(request, response);
