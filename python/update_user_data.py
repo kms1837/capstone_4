@@ -1,9 +1,7 @@
 import argparse
-
 import numpy as np
 import pandas as pd
 from pandas import Series, DataFrame
-
 import pymysql
 
 parser = argparse.ArgumentParser(description='Process some integers.')
@@ -14,7 +12,6 @@ parser.add_argument('--sum', dest='accumulate', action='store_const',
                     help='sum the integers (default: find the max)')
 
 args = parser.parse_args()
-print(args.accumulate(args.integers))
 
 # 데이터 베이스에 접속하는 함수
 def get_connection() :
@@ -25,8 +22,9 @@ def get_connection() :
 
 def user_data_load(stdeuntID) :
     # 쿼리문
-    sql = '''SELECT coding, teample, spec, grade, math, studentID
-             FROM capstone.final_score
+
+    sql = '''select coding, teample, spec, grade, math, studentID
+             from final_score
              where studentID = %s'''
 
     # 접속
