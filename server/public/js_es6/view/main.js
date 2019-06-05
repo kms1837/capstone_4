@@ -1,9 +1,9 @@
 var raderChart = null;
 var statsData = null;
 
-$(document).ready(() => {
+$( document ).ready(() => {
   let subMenuBtns = $('.sub-menu').find('button');
-  $('[data-toggle="tooltip"]').tooltip();
+  $('[data-toggle="tooltip"]').tooltip(); 
 
   $("#graphTooltip").tooltip({
     title: `<div class="text-left">학교에 다니시며 받으신 점수로 산출한 결과입니다. 각 분야에 만점 점수는 4.5점이고 사용자는 어느 분야에 뛰어난지 직관적으로 확인이 가능합니다.</div><br>
@@ -16,24 +16,24 @@ $(document).ready(() => {
     MATH<br>
     <div class="text-left">보통 수학을 잘하는 사람들이 CODING을 잘 한다고 합니다. 왜냐면 수학을 하며 논리성을 배우기 때문인데요. 그렇기에 MATH점수가 높다면 논리력이 뛰어날 확률이 높습니다.</div><br>
     GRADE<br>
-    <div class="text-left">총 학점입니다. 이는 학교를 다니며 받은 모든 과목의 총 학점으로 이 점수가 높다면 해당 학생은 어떤 과목이든 가리지 않고 모든 과목을 성실히 이행하였다는 증거가 될것입니다.</div>`,
-    html: true,
+    <div class="text-left">총 학점입니다. 이는 학교를 다니며 받은 모든 과목의 총 학점으로 이 점수가 높다면 해당 학생은 어떤 과목이든 가리지 않고 모든 과목을 성실히 이행하였다는 증거가 될것입니다.</div>`, 	
+    html: true, 
     placement: "top"
-  });
+  }); 
 
   $.map(subMenuBtns, btn => {
-    $(btn).click(() => {
+    $(btn).click( () => {
       let title = $(btn).text();
       let trackPanel = $("#track1")[0];
       let panelTitle = $(trackPanel).find('.card-title');
       let trackID = $(btn).attr('data-id');
 
-      panelTitle.text(title);
+      panelTitle.text(title);    
 
-      if (trackPanel.style.display == 'none') {
-        trackPanel.style.display = 'block';
+      if (trackPanel.style.display=='none') {
+          trackPanel.style.display = 'block';
       }
-
+      
       $.get(`/ability/current_track_Info/${trackID}`, data => {
         trackLookup(title, data);
       });
@@ -61,10 +61,22 @@ $(document).ready(() => {
       type: 'POST',
       success: response => {
         addSpecModel.modal('hide');
-        Swal.fire({ type: 'success', title: '스펙추가 요청성공' }).then(() => {
+        Swal.fire({type: 'success', title:'스펙추가 요청성공'})
+        .then(()=> {
           location.reload();
         });
       }
     });
   });
+
+  let showGraduateBtn = $('#showGraduate');
+  showGraduateBtn.click(() => {
+    let graduatePanel = $('#graduateList')[0];
+    showGraduateBtn.css('display', 'none');
+
+    if (graduatePanel.style.display=='none') {
+      graduatePanel.style.display = 'block';
+    }
+  });
+
 });
