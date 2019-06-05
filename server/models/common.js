@@ -15,7 +15,7 @@ module.exports = {
                 connection.release();
                 console.log('Query Error!');
                 return false;
-            } 
+            }
         }
         catch(err) {
             console.log('DB ERROR!');
@@ -52,9 +52,9 @@ module.exports = {
             catch(err) {
                 await connection.rollback();
                 connection.release();
-                console.log('Query Error!');
+                console.log('Query Error!', err);
                 return false;
-            } 
+            }
         }
         catch(err) {
             console.log('DB ERROR!');
@@ -76,7 +76,7 @@ module.exports = {
                 connection.release();
                 console.log('Query Error!', err);
                 return false;
-            } 
+            }
         }
         catch(err) {
             console.log('DB ERROR!');
@@ -98,7 +98,7 @@ module.exports = {
                 connection.release();
                 console.log('Query Error!');
                 return false;
-            } 
+            }
         }
         catch(err) {
             console.log('DB ERROR!');
