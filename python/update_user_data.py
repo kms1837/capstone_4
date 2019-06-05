@@ -1,8 +1,20 @@
+import argparse
+
 import numpy as np
 import pandas as pd
 from pandas import Series, DataFrame
 
 import pymysql
+
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument('integers', metavar='N', type=str, nargs='+',
+                    help='an integer for the accumulator')
+parser.add_argument('--sum', dest='accumulate', action='store_const',
+                    const=sum, default=max,
+                    help='sum the integers (default: find the max)')
+
+args = parser.parse_args()
+print(args.accumulate(args.integers))
 
 # 데이터 베이스에 접속하는 함수
 def get_connection() :
@@ -33,8 +45,7 @@ def user_data_load(stdeuntID) :
 
     return result
 
-a = input('업데이트할 아이디 : ')
-a = user_data_load(a)
+a = user_data_load(args.integers)
 print("업데이트중...")
 
 df_raw = pd.read_csv('../node/data/sw_grade.csv', index_col = 'class_number')
@@ -71,23 +82,23 @@ scores_list = []
 knn_final = KNeighborsClassifier(n_neighbors=5)
 knn_final.fit(df_x_scaled, df_y_converted)
 
-coding = a[0][0]
+coding = a[0][0] + 2
 teamwork = a[0][1]
 math = a[0][4]
 grade = a[0][3]
 activity = a[0][2]
 
-def update_grade(studentID ,grade) :
+def update_grade(studentID ,grade, spec) :
     # 쿼리문
     sql = '''update final_score
-             set final_grade = %s
+             set final_grade = %s, spec = %s
              where studentID = %s'''
 
     # 접속
     conn = get_connection()
     # 쿼리실행
     cursor = conn.cursor()
-    cursor.execute(sql, (grade, studentID))
+    cursor.execute(sql, (grade, spec,studentID))
 
     # 접속해제
     conn.commit()
@@ -107,16 +118,16 @@ y_new_predict = knn_final.predict(x_new_scaled)
 
 for i in y_new_predict:
     if i == 6 :
-        update_grade(a[0][5], 'Bronze')
+        update_grade(a[0][5], 'Bronze', activity)
     elif i == 1 :
-        update_grade(a[0][5], 'Challenger')
+        update_grade(a[0][5], 'Challenger', activity)
     elif i == 5 :
-        update_grade(a[0][5], 'Silver')
+        update_grade(a[0][5], 'Silver', activity)
     elif i == 4 :
-        update_grade(a[0][5], 'Gold')
+        update_grade(a[0][5], 'Gold', activity)
     elif i == 3 :
-        update_grade(a[0][5], 'Platinum')
+        update_grade(a[0][5], 'Platinum', activity)
     elif i == 2 :
-        update_grade(a[0][5], 'Dia')
+        update_grade(a[0][5], 'Dia', activity)
 
 print("업데이트 완료.")
