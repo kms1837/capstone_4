@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Purple Admin</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/public/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="/public/vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="/public/css/style.css">
+  <link rel="shortcut icon" href="/public/images/favicon.png" />
+  <link rel="stylesheet" href="/public/css/main.css">
+  <script src="/public/vendors/js/vendor.bundle.base.js"></script>
+  <script src="/public/vendors/js/vendor.bundle.addons.js"></script>
+</head>
+
+<body>
+  <div class="container-scroller">
+    <% include ./partials/_navbar.ejs %>
+    <div class="container-fluid page-body-wrapper">
+      <div class="content-wrapper">
+        <div class="row">
+        <% for(var i=0; i < track.length; i++) { %>
+          <div class="col-md-6 grid-margin stretch-card">
+            <div class="card" data-id="<%- track[i].id %>">
+              <div class="card-body">
+                <h2 class="card-title"><%= track[i].name %></h2>
+                <table class="table table-bordered table-score mb-4">
+                  <thead>
+                    <tr>
+                      <th>과목명</th>
+                      <th class="text-center">성적</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+
+                <div class="card bg-dark">
+                  <div class="card-body text-white trackScoreCard">
+                    <h4 id="trackScoreTitle">트랙 이수까지</h4>
+                    <h1 id="trackScore" class="text-right">0/18</h1>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% include ./partials/_footer.ejs %>
+  <script src="/public/js/track_detail.js"></script>
+  <script src="/public/js/view/track_score.js"></script>
+</body>
+
+</html>
