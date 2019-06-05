@@ -13,6 +13,26 @@ router.get('/', (request, response) => {
     });
 });
 
+router.get('/track_chart', async(request, response) => { 
+    await common.loginCheck(request, response);
+    let userInfo = await userModel.findToID(request.session.userID);
+    let trackInfo = await trackModel.getList();
+    response.render('track_chart.ejs', {user: userInfo[0], track: trackInfo});
+});
+
+router.get('/track_score', async(request, response) => {
+    await common.loginCheck(request, response); 
+    let userInfo = await userModel.findToID(request.session.userID);
+    let trackInfo = await trackModel.getList();
+    response.render('track_score.ejs', {user: userInfo[0], track: trackInfo});
+});
+
+router.get('/compare', async(request, response) => {
+    await common.loginCheck(request, response); 
+    let userInfo = await userModel.findToID(request.session.userID);
+    response.render('compare.ejs', {user: userInfo[0]});
+});
+
 router.get('/add_spec', (request, response) => {
     response.render('add_spec');
 });

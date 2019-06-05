@@ -24,10 +24,12 @@
           <% include ./student_detail.ejs %>
         </div>
         <div class="row">
-          <div class="col-md-12 sub-menu">
-          <% for(var i=0; i < track.length; i++) { %>
-            <button class="btn btn-outline-info btn-fw" href="#detail" data-id="<%= track[i].id %>"><%= track[i].name %></button>
-          <% } %>
+          <div class="col-md-12">
+            <div class="sub-menu">
+            <% for(var i=0; i < track.length; i++) { %>
+              <button class="btn btn-outline-info btn-fw" href="#detail" data-id="<%= track[i].id %>"><%= track[i].name %></button>
+            <% } %>
+            </div>
           </div>
         </div>
 
@@ -58,6 +60,7 @@
                           <h1 id="trackScore" class="text-right">0/18</h1>
                         </div>
                       </div>
+                      
                     </div>
                   </div>
               </div>

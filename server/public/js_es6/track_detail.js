@@ -1,36 +1,28 @@
 var barChart = null;
 
 function trackLookup(title, data) {
-  let trackPanel = $("#track1")[0];
-  let panelContent = $(trackPanel).find('.card-body'); 
-  let tableBody = $(panelContent).find('.table-score tbody');
-
   let barChartObj = $('#barChart')[0].getContext('2d');
-  let trackScoreCard = $('.trackScoreCard');
+  if (barChart!=null) {
+    barChart.destroy();
+  } // 반복수행시 중복방지
+
+  setBarChart(barChartObj, data);
+
+  let trackPanel = $("#track1")[0];
+  let panelContent = $(trackPanel).find('.card-body');
+
+  setTable(panelContent, title, data);
+}
+
+function setTable(tableObj, title, data) {
+  let tableBody = $(tableObj).find('.table-score tbody');
+  let trackScoreCard = $(tableObj).find('.trackScoreCard');
   let trackScore = data.trackScore.length*3;
 
   trackScoreCard.find('#trackScoreTitle').text(`${title} 트랙 이수 까지`);
   trackScoreCard.find('#trackScore').text(`${trackScore} / 18`);
 
   tableBody.empty();
-
-  let options = {
-    scales: {
-      yAxes: [{
-        display: true,
-        ticks: {
-            suggestedMin: 0,
-            max: 4.5,
-            beginAtZero: true
-        }
-      }]
-    },
-    title: {
-        display: true,
-        text: '트랙점수 비교'
-    }
-  };
-
   if (data.trackScore.length > 0) {
     $.map(data.trackScore, item => {
       tableBody.append(`
@@ -51,10 +43,25 @@ function trackLookup(title, data) {
         </td>      
       </tr>`);
   }
+}
 
-  if (barChart!=null) {
-    barChart.destroy();
-  }
+function setBarChart(barChartObj, data) {
+  let options = {
+    scales: {
+      yAxes: [{
+        display: true,
+        ticks: {
+            suggestedMin: 0,
+            max: 4.5,
+            beginAtZero: true
+        }
+      }]
+    },
+    title: {
+        display: true,
+        text: '트랙점수 비교'
+    }
+  };
 
   barChart = new Chart(barChartObj, {
     type: 'bar',

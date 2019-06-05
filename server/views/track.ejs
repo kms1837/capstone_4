@@ -30,9 +30,11 @@
             <div class="col-md-12 grid-margin">
               <div class="card">
                 <div class="card-body text-center">
+                  <div class="sub-menu">
                   <% for(var i=0; i < track.length; i++) { %>
                     <a class="btn btn-outline-info btn-fw" href="/admin/track/<%= track[i].id%>"><%= track[i].name %></a>
                   <% } %>
+                  </div>
                 </div>
               </div>
             </div>
