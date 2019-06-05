@@ -19,8 +19,42 @@
     <% include ./partials/_navbar.ejs %>
     <div class="container-fluid page-body-wrapper">
       <div class="content-wrapper">
-        <% for(var i=0; i<10; i++) { %>
-        <% } %>
+        <h1 class="text-center">
+          <%= user.name %>님의 sw역량 등급은 <span class="badge badge-<%- gradeToBgColor(finalScore.final_grade) %>"><%= finalScore.final_grade %></span>입니다.
+        </h1>
+
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title"> 
+              <span class="badge badge-<%- gradeToBgColor(finalScore.final_grade) %>"><%= finalScore.final_grade %></span>
+              등급의 졸업생 데이터
+            </h2>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>졸업생 학번</th>
+                  <th>역량 수치</th>
+                  <th>취업한 회사</th>
+                </tr>
+              </thead>
+              <tbody>
+              <% for(var i=0; i<graduate.length; i++ ) { %>
+                <tr>
+                  <td><%=graduate[i].studentID %> 졸업생</td>
+                  <td>
+                    <% for(var j=0; j<graduate[i].state.length; j++) { %>
+                      <%= graduate[i].state[j].name %> <%= graduate[i].state[j].score %><% if(j < graduate[i].state.length - 1) { %>,<% } %>
+                    <% } %>
+                  </td>
+                  <td><%=graduate[i].corporation %></td>
+                </tr>
+              <% } %>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

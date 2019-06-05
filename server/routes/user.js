@@ -3,8 +3,51 @@ const userModel = require('../models/user');
 const trackModel = require('../models/track');
 const stuSpecModel = require('../models/stu_spec');
 const finalScoreModel = require('../models/final_score');
+const graduateModel = require('../models/graduate');
 const common = require('./common');
 const router = express.Router();
+
+function gradeToBgColor(grade) {
+    let bgColor = "";
+    switch (grade) {
+        case "Challenger":
+            bgColor = "gradient-primary";
+            break;
+        case "Dia":
+            bgColor = "gradient-Info";
+            break;
+        case "Platinum":
+            bgColor = "gradient-success";
+            break;
+        case "Gold":
+            bgColor = "gradient-warning";
+            break;
+        case "Silver":
+            bgColor = "secondary";
+            break;
+        case "Bronze":
+            bgColor = "danger";
+            break;
+    }
+
+    return bgColor;
+}
+
+function graduateListWrapper(graduateList) {
+  for (let graduate of graduateList) {
+    graduate["state"] = finalScoreWrapper(graduate);
+  }
+
+  return graduateList;
+}
+
+function finalScoreWrapper(finalScore) {
+  let wrapper = [{"name": "CODING", "score": finalScore.coding}, {"name": "MATH", "score": finalScore.math},
+  {"name": "TEAMPLE", "score": finalScore.teample}, {"name": "GRADE", "score": finalScore.grade},
+  {"name": "SPEC", "score": finalScore.spec}];
+
+  return wrapper;
+}
 
 router.get('/', (request, response) => {
     let userData = request.body;
@@ -30,7 +73,11 @@ router.get('/track_score', async(request, response) => {
 router.get('/compare', async(request, response) => {
     await common.loginCheck(request, response); 
     let userInfo = await userModel.findToID(request.session.userID);
-    response.render('compare.ejs', {user: userInfo[0]});
+    let finalScore = await finalScoreModel.findToStudentID(request.session.studentID);
+    let graduateList = await graduateModel.listToGrade(finalScore[0]['final_grade']);
+    graduateListWrapper(graduateList);
+
+    response.render('compare.ejs', {user: userInfo[0], finalScore: finalScore[0], graduate: graduateList, gradeToBgColor: gradeToBgColor});
 });
 
 router.get('/add_spec', (request, response) => {
@@ -39,9 +86,7 @@ router.get('/add_spec', (request, response) => {
 
 router.get('/rader/:studentID', async(request, response) => {
     let finalScore = await finalScoreModel.findToStudentID(request.params.studentID);
-    let stats = [{"name": "CODING", "score": finalScore[0].coding}, {"name": "MATH", "score": finalScore[0].math},
-    {"name": "TEAMPLE", "score": finalScore[0].teample}, {"name": "GRADE", "score": finalScore[0].grade},
-    {"name": "SPEC", "score": finalScore[0].spec}];
+    let stats = finalScoreWrapper(finalScore[0]);
 
     response.status(200).json(stats);
 });
@@ -49,37 +94,11 @@ router.get('/rader/:studentID', async(request, response) => {
 router.get('/info/:studentID', async(request, response) => {
     let userInfo = await userModel.findToStudentID(request.params.studentID);
     let finalScore = await finalScoreModel.findToStudentID(request.params.studentID);
-    let stats = [{"name": "CODING", "score": finalScore[0].coding}, {"name": "MATH", "score": finalScore[0].math},
-    {"name": "TEAMPLE", "score": finalScore[0].teample}, {"name": "GRADE", "score": finalScore[0].grade},
-    {"name": "SPEC", "score": finalScore[0].spec}]
+    let stats = finalScoreWrapper(finalScore[0]);
 
     response.render('student_detail', 
         {user: userInfo[0], finalScore: finalScore[0], stats: stats, mode:false,
-        gradeToBgColor: grade => {
-            let bgColor = "";
-            switch (grade) {
-                case "Challenger":
-                    bgColor = "gradient-primary";
-                    break;
-                case "Dia":
-                    bgColor = "gradient-Info";
-                    break;
-                case "Platinum":
-                    bgColor = "gradient-success";
-                    break;
-                case "Gold":
-                    bgColor = "gradient-warning";
-                    break;
-                case "Silver":
-                    bgColor = "secondary";
-                    break;
-                case "Bronze":
-                    bgColor = "danger";
-                    break;
-            }
-
-            return bgColor;
-        }});
+        gradeToBgColor: gradeToBgColor });
 });
 
 router.get('/info', async(request, response) => {
@@ -89,37 +108,14 @@ router.get('/info', async(request, response) => {
     let trackInfo = await trackModel.getList();
     let finalScore = await finalScoreModel.findToStudentID(request.session.studentID);
     let specList = await stuSpecModel.StudentIDtoList(request.session.studentID);
-    let stats = [{"name": "CODING", "score": finalScore[0].coding}, {"name": "MATH", "score": finalScore[0].math},
-    {"name": "TEAMPLE", "score": finalScore[0].teample}, {"name": "GRADE", "score": finalScore[0].grade},
-    {"name": "SPEC", "score": finalScore[0].spec}]
+    let graduateList = await graduateModel.listToGrade(finalScore[0]['final_grade']);
+    let stats = finalScoreWrapper(finalScore);
+    graduateListWrapper(graduateList);
 
     response.render('main', 
-        {user: userInfo[0], track: trackInfo, finalScore: finalScore[0], stats: stats, specList: specList, mode:true,
-        gradeToBgColor: grade => {
-            let bgColor = "";
-            switch (grade) {
-                case "Challenger":
-                    bgColor = "gradient-primary";
-                    break;
-                case "Dia":
-                    bgColor = "gradient-Info";
-                    break;
-                case "Platinum":
-                    bgColor = "gradient-success";
-                    break;
-                case "Gold":
-                    bgColor = "gradient-warning";
-                    break;
-                case "Silver":
-                    bgColor = "secondary";
-                    break;
-                case "Bronze":
-                    bgColor = "danger";
-                    break;
-            }
-
-            return bgColor;
-        }});
+        {user: userInfo[0], track: trackInfo, finalScore: finalScore[0], 
+          stats: stats, specList: specList, graduate: graduateList, 
+          mode:true, gradeToBgColor: gradeToBgColor });
 });
 
 router.post('/login', async (request, response) => {

@@ -67,6 +67,44 @@
             </div>
           </div>
         </div>
+
+        <button id="showGraduate" class="btn btn-dark btn-lg btn-block">같은 등급의 졸업생 정보</button>
+
+        <div class="row">
+          <div class="col-12 grid-margin stretch-card" id="graduateList" style="display:none">
+            <div class="card">
+              <div class="card-body">
+                <h2 class="card-title"> 
+                  <span class="badge badge-<%- gradeToBgColor(finalScore.final_grade) %>"><%= finalScore.final_grade %></span>
+                  등급의 졸업생 데이터
+                </h2>
+
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>졸업생 학번</th>
+                      <th>역량 수치</th>
+                      <th>취업한 회사</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <% for(var i=0; i<graduate.length; i++ ) { %>
+                    <tr>
+                      <td><%=graduate[i].studentID %> 졸업생</td>
+                      <td>
+                        <% for(var j=0; j<graduate[i].state.length; j++) { %>
+                          <%= graduate[i].state[j].name %> <%= graduate[i].state[j].score %><% if(j < graduate[i].state.length - 1) { %>,<% } %>
+                        <% } %>
+                      </td>
+                      <td><%=graduate[i].corporation %></td>
+                    </tr>
+                  <% } %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
         
 
         <div class="modal fade" id="specList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -193,7 +231,7 @@
   <script src="/sweetalert2/dist/sweetalert2.min.js"></script>
   <script src="/public/js/track_detail.js"></script>
   <script src="/public/js/rader.js"></script>
-  <script src="/public/js/main.js"></script>
+  <script src="/public/js/view/main.js"></script>
 
   <script>
     $( document ).ready(function() {
