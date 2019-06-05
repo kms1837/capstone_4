@@ -6,10 +6,35 @@
   <div class="navbar-menu-wrapper d-flex align-items-stretch">
     <ul class="navbar-nav navbar-nav-left">
       <li class="nav-item">
-        <a class="nav-link count-indicator" href="/about">소개</a>
+        <a class="nav-link count-indicator" href="/">홈</a>
+      </li>
+
+      <% if (user.auth) { %>
+      <li class="nav-item">
+        <a class="nav-link count-indicator" href="/">학생 상세조회</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link count-indicator" href="/contact-us">문의</a>
+        <a class="nav-link count-indicator" href="/">트랙별 학생조회</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link count-indicator" href="/">외부스펙 승인</a>
+      </li>
+
+      <% } else { %>
+      <li class="nav-item">
+        <a class="nav-link count-indicator" href="/about">트랙</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link count-indicator" href="/about">졸업생과의 비교</a>
+      </li>
+      
+      <% } %>
+
+      <li class="nav-item">
+        <a class="nav-link count-indicator" href="/about">시스템 소개</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link count-indicator" href="/contact-us">기타 문의</a>
       </li>
     </ul>
     <% if(locals.user) { %>
