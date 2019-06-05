@@ -1,0 +1,53 @@
+<div class="col-md-3 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <div class="profile text-center">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNsrG38DwAFhgKAAHh4EQAAAABJRU5ErkJggg==" class="faceimg" alt="image">
+        <h1><%= user.name %></h1>
+      </div>
+
+      
+      <% for(var i=0; i < stats.length; i++) { %>
+      <div class="progress-wrapper">
+        <h4 class="card-title"><%= stats[i].name %></h4>
+        <div class="progress" data-toggle="tooltip" data-placement="right" title="<%= stats[i].score + ' / ' + 4.5 %>">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: <%= (stats[i].score/4.5) * 100 %>%" aria-valuenow="<%=stats[i].score %>" aria-valuemin="0" aria-valuemax="4.5"></div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+
+    <div class="card-footer bg-<%= gradeToBgColor(finalScore.final_grade) %> card-img-holder text-white">
+      <div class="row justify-content-center">
+        <h1 class="text-center"><%= finalScore.final_grade %></h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <canvas id="raderChart" style="height:230px"></canvas>
+      <div class="col-md-12 text-center">
+        <% if(mode) { %>
+        <button class="btn btn-inverse-dark btn-icon" id="graphTooltip">
+          <i class="mdi mdi-comment-question-outline"></i>
+        </button>
+        <% } %>
+      </div>
+      <% if(mode) { %>
+      <div class="nav-item dropdown">
+        <a class="btn btn-success btn-lg float-right nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          <i class="mdi mdi-comment-plus-outline"></i>
+          스펙
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" data-toggle="modal" data-target="#addSpec">스펙추가 요청</a>
+          <a class="dropdown-item" data-toggle="modal" data-target="#specList">스펙목록</a>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>

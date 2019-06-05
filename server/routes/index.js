@@ -4,6 +4,7 @@ const ability = require('./ability');
 const file = require('./file');
 const admin = require('./admin');
 const common = require('./common');
+const userModel = require('../models/user');
 
 module.exports = function (server) {
     server.use('/user', user);
@@ -32,11 +33,15 @@ module.exports = function (server) {
       }
     });
 
-    server.get('/about', (request, response) => {
-        response.render('about');
+    server.get('/about', async(request, response) => {
+        await common.loginCheck(request, response);
+        let userData = await userModel.findToID(request.session.userID);
+        response.render('about', {user: userData[0]});
     }); // 소개
 
-    server.get('/contact-us', (request, response) => {
-        response.render('contact_us');
+    server.get('/contact-us', async(request, response) => {
+        await common.loginCheck(request, response);
+        let userData = await userModel.findToID(request.session.userID);
+        response.render('contact_us', {user: userData[0]});
     }); // 문의
 }

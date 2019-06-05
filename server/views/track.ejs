@@ -25,13 +25,16 @@
             </div>
           </div>
           <br> <br>
+
           <div class="row">
             <div class="col-md-12 grid-margin">
               <div class="card">
                 <div class="card-body text-center">
+                  <div class="sub-menu">
                   <% for(var i=0; i < track.length; i++) { %>
                     <a class="btn btn-outline-info btn-fw" href="/admin/track/<%= track[i].id%>"><%= track[i].name %></a>
                   <% } %>
+                  </div>
                 </div>
               </div>
             </div>
@@ -56,111 +59,85 @@
                           학번
                         </th>
                         <th>
-                          가상현실_과목1
+                          트랙 점수 평균
                         </th>
                         <th>
-                          가상현실_과목2
+                          상세보기
                         </th>
                       </tr>
                     </thead>
                     <tbody id="myTable">
                     <% for(var i=0; i<students.length; i++) { %>
-                      <tr>
+                      <tr data-id="<%- students[i].studentID %>">
                         <td class="py-1"><img src="/public/images/faces-clipart/pic-1.png" alt="image"></td>
                         <td><%= students[i].name %></td>
                         <td><%= students[i].studentID %></td>
-                        <td><%= students[i].studentID %></td>
-                        <td><%= students[i].studentID %></td>
-                        <td><%= students[i].studentID %></td>
-                        <td><%= students[i].studentID %></td>
+                        <td><%= students[i].track_score %></td>
+                        <td><button class="btn btn-Link lookup" data-toggle="modal" data-target="#studetnDetail">상세보기</button></td>
                       </tr>
                     <% } %>
                     </tbody>
                   </table>
                 </div>
-                </div>
               </div>
             </div>
+          </div>  
+        </div>
+      </div>
+    </div>    
+  </div>
 
+  <% include ./partials/_footer.ejs %>
 
-                <div class="col-md-6 grid-margin stretch-card">
-                  <div class="card">
-                    <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                      <h4 class="card-title">전체 학생 가상현실 평점</h4>
-                      <canvas id="myChart"></canvas>
-                      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-                      <script>
-                      var ctx = document.getElementById('myChart').getContext('2d');
-    var chart = new Chart(ctx, {
-        // The type of chart we want to create
-        type: 'bar',
-
-        // The data for our dataset
-        data: {
-            labels: ['가상현실 총 평점', '해당 학생 평점'],
-            datasets: [{
-                label: 'My First dataset',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: [3.33, 4.11]
-            }]
-        },
-
-        // Configuration options go here
-        options: {}
-    });</script>
+  <div class="modal fade" id="studetnDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="row">
+          <div class="col-12 grid-margin stretch-card" id="track1">
+            <div class="card">
+              <div class="card-body">
+                  <div class="row justify-content-between">
+                    <div class="col-md-6">
+                      <canvas id="barChart" style="height:600px"></canvas>
                     </div>
-                  </div>
-                </div>
-                <div class="col-md-6 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                          <h4 class="card-title"><%=user.name%> 가상현실 트랙(과목 성적)</h4>
-                          <table class="table">
-                            <thead>
-                              <tr>
-                                <th>과목명</th>
-                                <th>성적</th>
+                    <div class="col-md-4">
+                      <table class="table table-bordered table-score mb-4">
+                        <thead>
+                          <tr>
+                            <th>과목명</th>
+                            <th class="text-center">성적</th>
+                          </tr>
+                        </thead>
+                        <tbody id="myTable">
+                        </tbody>
+                      </table>
 
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>가상현실_과목1</td>
-
-                                <td><label class="badge badge-danger">A+</label></td>
-                              </tr>
-                              <tr>
-                                <td>가상현실_과목2</td>
-
-                                <td><label class="badge badge-warning">A0</label></td>
-                              </tr>
-
-                            </tbody>
-                          </table>
+                      <div class="card bg-dark">
+                        <div class="card-body text-white trackScoreCard">
+                          <h4 id="trackScoreTitle">트랙 이수까지</h4>
+                          <h1 id="trackScore" class="text-right">0/18</h1>
                         </div>
                       </div>
-                </div>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
     </div>
-    <% include ./partials/_footer.ejs %>
   </div>
+
   <script src="/public/vendors/js/vendor.bundle.base.js"></script>
   <script src="/public/vendors/js/vendor.bundle.addons.js"></script>
   <script src="/public/js/off-canvas.js"></script>
   <script src="/public/js/misc.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="/public/js/track_detail.js"></script>
+  <script src="/public/js/track.js"></script>
+
   <script>
-  $(document).ready(function(){
-    $("#myInput").on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $("#myTable tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-      });
-    });
-  });
+  
   </script>
 </body>
 

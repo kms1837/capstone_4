@@ -6,10 +6,42 @@
   <div class="navbar-menu-wrapper d-flex align-items-stretch">
     <ul class="navbar-nav navbar-nav-left">
       <li class="nav-item">
-        <a class="nav-link count-indicator" href="/about">소개</a>
+        <a class="nav-link count-indicator" href="/">홈</a>
+      </li>
+
+      <% if (user.auth) { %>
+      <li class="nav-item">
+        <a class="nav-link count-indicator" href="/admin">학생 상세조회</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link count-indicator" href="/contact-us">문의</a>
+        <a class="nav-link count-indicator" href="/track/1">트랙별 학생조회</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link count-indicator" href="/accept_spec">외부스펙 승인</a>
+      </li>
+
+      <% } else { %>
+      <li class="nav-item">
+        <a class="nav-link dropdown-toggle" id="trackDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+          트랙 조회
+        </a>
+        
+        <div class="dropdown-menu navbar-dropdown" aria-labelledby="trackDropdown">
+          <a class="nav-link count-indicator" href="/user/track_chart">차트 조회</a>
+          <a class="nav-link count-indicator" href="/user/track_score">성적 조회</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link count-indicator" href="/user/compare">졸업생과의 비교</a>
+      </li>
+      
+      <% } %>
+
+      <li class="nav-item">
+        <a class="nav-link count-indicator" href="/about">시스템 소개</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link count-indicator" href="/contact-us">기타 문의</a>
       </li>
     </ul>
     <% if(locals.user) { %>
