@@ -17,6 +17,51 @@ router.get('/add_spec', (request, response) => {
     response.render('add_spec');
 });
 
+router.get('/rader/:studentID', async(request, response) => {
+    let finalScore = await finalScoreModel.findToStudentID(request.params.studentID);
+    let stats = [{"name": "CODING", "score": finalScore[0].coding}, {"name": "MATH", "score": finalScore[0].math},
+    {"name": "TEAMPLE", "score": finalScore[0].teample}, {"name": "GRADE", "score": finalScore[0].grade},
+    {"name": "SPEC", "score": finalScore[0].spec}];
+
+    response.status(200).json(stats);
+});
+
+router.get('/info/:studentID', async(request, response) => {
+    let userInfo = await userModel.findToStudentID(request.params.studentID);
+    let finalScore = await finalScoreModel.findToStudentID(request.params.studentID);
+    let stats = [{"name": "CODING", "score": finalScore[0].coding}, {"name": "MATH", "score": finalScore[0].math},
+    {"name": "TEAMPLE", "score": finalScore[0].teample}, {"name": "GRADE", "score": finalScore[0].grade},
+    {"name": "SPEC", "score": finalScore[0].spec}]
+
+    response.render('student_detail', 
+        {user: userInfo[0], finalScore: finalScore[0], stats: stats, mode:false,
+        gradeToBgColor: grade => {
+            let bgColor = "";
+            switch (grade) {
+                case "Challenger":
+                    bgColor = "gradient-primary";
+                    break;
+                case "Dia":
+                    bgColor = "gradient-Info";
+                    break;
+                case "Platinum":
+                    bgColor = "gradient-success";
+                    break;
+                case "Gold":
+                    bgColor = "gradient-warning";
+                    break;
+                case "Silver":
+                    bgColor = "secondary";
+                    break;
+                case "Bronze":
+                    bgColor = "danger";
+                    break;
+            }
+
+            return bgColor;
+        }});
+});
+
 router.get('/info', async(request, response) => {
     await common.loginCheck(request, response);
 
@@ -29,7 +74,7 @@ router.get('/info', async(request, response) => {
     {"name": "SPEC", "score": finalScore[0].spec}]
 
     response.render('main', 
-        {user: userInfo[0], track: trackInfo, finalScore: finalScore[0], stats: stats, specList: specList,
+        {user: userInfo[0], track: trackInfo, finalScore: finalScore[0], stats: stats, specList: specList, mode:true,
         gradeToBgColor: grade => {
             let bgColor = "";
             switch (grade) {
