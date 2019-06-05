@@ -22,10 +22,18 @@ session = {
     saveUninitialized: true
 };
 
+python = {
+    mode: 'text',
+    pythonPath: 'path',
+    pythonOptions: ['-u'],
+    scriptPath: __dirname + '/../../python/'
+};
+
 module.exports = {
     'serverConfig': serverConfig,
     'dbConfig' : dbconfig,
-    'sessionConfig': session
+    'sessionConfig': session,
+    'pythonConfig': python
 }
 `;
 
