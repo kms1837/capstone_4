@@ -1,0 +1,12 @@
+numpy
+pandas
+pymysql
+sklearn
+xlrd
+datetime
+matlotlib
+standardscaler
+train_test_split
+KNeighborsClassifier
+classification_report
+metrics
