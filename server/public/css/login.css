@@ -1,5 +1,5 @@
 body {
-    background: #fafafa;
+    background: #000;
 }
 
 .wrapper {
@@ -66,21 +66,29 @@ footer {
     color: red;
 }
 
-.background-img {
+.background-black, .background-img{
   position: fixed;
+
+  height: 100%;
+  width: 100%;
+}
+
+.background-black{
+  z-index: -1;
+  background: rgba(0,0,0, 0.3);
+}
+
+.background-img {
   background-image: url("/public/img/background2.png");
 
   filter: blur(15px);
   -webkit-filter: blur(15px);
   
-  height: 100%;
-  width: 100%;
-  
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 
-  z-index: -1;
+  z-index: -2;
 } 
 
 .logo {
