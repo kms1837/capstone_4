@@ -109,7 +109,7 @@ router.get('/info', async(request, response) => {
     let finalScore = await finalScoreModel.findToStudentID(request.session.studentID);
     let specList = await stuSpecModel.StudentIDtoList(request.session.studentID);
     let graduateList = await graduateModel.listToGrade(finalScore[0]['final_grade']);
-    let stats = finalScoreWrapper(finalScore);
+    let stats = finalScoreWrapper(finalScore[0]);
     graduateListWrapper(graduateList);
 
     response.render('main', 
