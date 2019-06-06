@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>소프트웨어 역량평가 시스템</title>
+  <title>SPAS</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="/public/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
@@ -16,6 +16,9 @@
 </head>
 
 <body>
+  <div class="background-black"></div>
+  <div class="background-img"></div>
+
   <div class="container-scroller">
     <% include ./partials/_navbar.ejs %>
     <div class="container-fluid page-body-wrapper">
@@ -23,11 +26,15 @@
         <div class="row">
           <% include ./student_detail.ejs %>
         </div>
+
+        <hr>
+
         <div class="row">
           <div class="col-md-12">
+            <h1 class="text-white grid-margin">| 트랙 정보</h1>
             <div class="sub-menu">
             <% for(var i=0; i < track.length; i++) { %>
-              <button class="btn btn-outline-info btn-fw" href="#detail" data-id="<%= track[i].id %>"><%= track[i].name %></button>
+              <button class="btn btn-outline-secondary btn-fw" href="#detail" data-id="<%= track[i].id %>"><%= track[i].name %></button>
             <% } %>
             </div>
           </div>
@@ -68,7 +75,9 @@
           </div>
         </div>
 
-        <button id="showGraduate" class="btn btn-dark btn-lg btn-block">같은 등급의 졸업생 정보</button>
+        <hr>
+        <h1 class="text-white grid-margin">| 같은 등급 졸업생 정보</h1>
+        <button id="showGraduate" class="btn btn-outline-secondary btn-lg btn-block">졸업생 정보 보기</button>
 
         <div class="row">
           <div class="col-12 grid-margin stretch-card" id="graduateList" style="display:none">
@@ -84,6 +93,7 @@
                     <tr>
                       <th>졸업생 학번</th>
                       <th>역량 수치</th>
+                      <th>주요 스펙</th>
                       <th>취업한 회사</th>
                     </tr>
                   </thead>
@@ -96,7 +106,8 @@
                           <%= graduate[i].state[j].name %> <%= graduate[i].state[j].score %><% if(j < graduate[i].state.length - 1) { %>,<% } %>
                         <% } %>
                       </td>
-                      <td><%=graduate[i].corporation %></td>
+                      <td class="text-left"><%= graduate[i]["graduate_spec"]%></td>
+                      <td class="text-left"><%= graduate[i].corporation %></td>
                     </tr>
                   <% } %>
                   </tbody>
@@ -120,9 +131,8 @@
                     <table class="table table-striped">
                       <thead>
                         <tr>
+                          <th></th>
                           <th>스펙명</th>
-                          <th>종류</th>
-                          <th>점수</th>
                           <th>파일</th>
                           <th>설명</th>
                           <th>결과</th>
@@ -133,16 +143,15 @@
                       <tbody>
                       <% for(var i=0; i<specList.length; i++) { %>
                         <tr>
+                          <td><%= i+1 %></td>
                           <td><%= specList[i].name %></td>
-                          <td><%= specList[i].spec_typeID %></td>
-                          <td><%= specList[i].score %></td>
                           <td>
                             <a target="_blank" class="btn btn-Link" href="/uploads/<%= specList[i].path %>">
                               <i class="mdi mdi-file-document"></i>
                               파일보기
                             </a>
                           </td>
-                          <td><%= specList[i].spec_explain %></td>
+                          <td class="text-left"><%= specList[i].spec_explain %></td>
                           <td>
                             <% if(specList[i].regist_agree && specList[i].request_date) { %>
                               <label class="badge badge-success">승인</label>
@@ -152,8 +161,8 @@
                               <label class="badge badge-dark">승인대기</label>
                             <% } %>
                           </td>
-                          <td><%= specList[i].request_date %></td>
-                          <td><%= specList[i].agree_date %></td>
+                          <td class="text-left"><%= specList[i].request_date %></td>
+                          <td class="text-left"><%= specList[i].agree_date %></td>
                         </tr>
                       <% } %>
                       </tbody>

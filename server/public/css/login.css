@@ -2,6 +2,10 @@ body {
     background: #fafafa;
 }
 
+.wrapper {
+  margin-top: 50px;
+}
+
 .content {
     display: table;
     width: 100%;
@@ -15,7 +19,7 @@ body {
 
 .login-form {
     margin: 10px auto;
-    padding: 10px 0;
+    padding: 40px 0 10px;
     width: 350px;
     min-height: 350px;
 
@@ -61,3 +65,20 @@ footer {
 #error {
     color: red;
 }
+
+.background-img {
+  position: fixed;
+  background-image: url("/public/img/background2.png");
+
+  filter: blur(15px);
+  -webkit-filter: blur(15px);
+  
+  height: 100%;
+  width: 100%;
+  
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  z-index: -1;
+} 

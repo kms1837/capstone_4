@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Purple Admin</title>
+  <title>SPAS-관리자</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="/public/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
@@ -16,11 +16,14 @@
 </head>
 
 <body>
+  <div class="background-black"></div>
+  <div class="background-img"></div>
+
   <div class="container-scroller">
     <% include ./partials/_navbar.ejs %>
     <div class="container-fluid page-body-wrapper">
       <div class="content-wrapper">
-        <% include ./partials/_admin-menu.ejs %>
+        <h1 class="grid-margin text-center text-white">학생 목록</h1>
 
         <div class="input-group">
           <input id = "myInput" type="text" class="form-control" placeholder="학생 이름 조회" aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -42,7 +45,7 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>
+                      <th style="width: 10%;">
                         User
                       </th>
                       <th>
@@ -54,10 +57,10 @@
                       <th>
                         SW역량등급
                       </th>
-                      <th>
+                      <th style="width: 20%;">
                         상세보기
                       </th>
-                      <th>
+                      <th style="width: 20%;">
                         관리자 메모
                       </th>
                     </tr>
@@ -88,8 +91,18 @@
                           <label class="badge badge-primary"><%= students[i].final_grade%></label>
                         <% } %>
                       </td>
-                      <td><button class="btn btn-Link lookup" data-toggle="modal" data-target="#studetnDetail">상세보기</button></td>
-                      <td><button class="btn btn-Link record">메모</button></td>
+                      <td>
+                        <button class="btn btn-success lookup" data-toggle="modal" data-target="#studetnDetail">
+                        <i class="mdi mdi-account-card-details"></i>
+                          상세보기
+                        </button>
+                      </td>
+                      <td>
+                        <button class="btn btn-info btn-md record">
+                          <i class="mdi mdi-message-processing"></i>
+                          메모
+                        </button>
+                      </td>
                     </tr>
                   <% } %>
                   </tbody>
@@ -107,8 +120,17 @@
   <div class="modal fade" id="studetnDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="row">
+        <div class="modal-header">
+          <h3 class="modal-title">| 학생 정보 상세보기</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
+        <div class="modal-body">
+          <div class="row">
+
+          </div>
         </div>
       </div>
     </div>
@@ -116,8 +138,6 @@
 
   <% include ./partials/_footer.ejs %>
 
-  <script src="/public/vendors/js/vendor.bundle.base.js"></script>
-  <script src="/public/vendors/js/vendor.bundle.addons.js"></script>
   <script src="/public/js/off-canvas.js"></script>
   <script src="/public/js/misc.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>

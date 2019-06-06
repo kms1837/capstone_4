@@ -33,7 +33,7 @@ router.get('/track', async(request, response) => {
     let userData = await userModel.findToID(request.session.userID);
     let trackInfo = await trackModel.getList();
     let students = await userModel.getScoreList();
-    response.render('track.ejs', {user: userData[0], track: trackInfo, students: students});
+    response.render('track.ejs', {user: userData[0], trackName: "전체 보기", track: trackInfo, students: students});
 });
 
 router.get('/track/:trackID', async(request, response) => {
@@ -41,7 +41,11 @@ router.get('/track/:trackID', async(request, response) => {
     let userData = await userModel.findToID(request.session.userID);
     let trackInfo = await trackModel.getList();
     let students = await studentTrackModel.getTrackIDtoList(request.params.trackID);
-    response.render('track.ejs', {user: userData[0], track: trackInfo, students: students});
+    let trackName = await trackModel.findToID(request.params.trackID);
+
+    console.log('asd', trackName[0].name);
+
+    response.render('track.ejs', {user: userData[0], trackName: trackName[0].name , track: trackInfo, students: students});
 });
 
 router.get('/accept_waiting', async(request, response) => {
