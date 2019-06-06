@@ -82,3 +82,8 @@ footer {
 
   z-index: -1;
 } 
+
+.logo {
+  width: 200px;
+  margin: 0 auto;   
+}
