@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Purple Admin</title>
+  <title>SPAS-나의 모든 트랙정보</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="/public/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
@@ -15,10 +15,16 @@
 </head>
 
 <body>
+  <div class="background-img"></div>
+
   <div class="container-scroller">
     <% include ./partials/_navbar.ejs %>
     <div class="container-fluid page-body-wrapper">
       <div class="content-wrapper">
+        <h1 class="grid-margin text-white">
+            | 나의 모든 트랙정보(이수 학점)
+        </h1>
+
         <div class="row">
         <% for(var i=0; i < track.length; i++) { %>
           <div class="col-md-6 grid-margin stretch-card">

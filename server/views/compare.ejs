@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Purple Admin</title>
+  <title>SPAS-같은등급의 졸업생</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="/public/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
@@ -15,12 +15,14 @@
 </head>
 
 <body>
+  <div class="background-img"></div>
+
   <div class="container-scroller">
     <% include ./partials/_navbar.ejs %>
     <div class="container-fluid page-body-wrapper">
       <div class="content-wrapper">
-        <h1 class="text-center">
-          <%= user.name %>님의 sw역량 등급은 <span class="badge badge-<%- gradeToBgColor(finalScore.final_grade) %>"><%= finalScore.final_grade %></span>입니다.
+        <h1 class="grid-margin text-white">
+          <%= user.name %>님의 sw역량 등급은 <span class="rank bg-<%- gradeToBgColor(finalScore.final_grade) %>"><%= finalScore.final_grade %></span>입니다.
         </h1>
 
         <div class="card">
@@ -34,6 +36,7 @@
                 <tr>
                   <th>졸업생 학번</th>
                   <th>역량 수치</th>
+                  <th>주요 스펙</th>
                   <th>취업한 회사</th>
                 </tr>
               </thead>
@@ -46,7 +49,8 @@
                       <%= graduate[i].state[j].name %> <%= graduate[i].state[j].score %><% if(j < graduate[i].state.length - 1) { %>,<% } %>
                     <% } %>
                   </td>
-                  <td><%=graduate[i].corporation %></td>
+                  <td class="text-left"><%= graduate[i]["graduate_spec"]%></td>
+                  <td class="text-left"><%=graduate[i].corporation %></td>
                 </tr>
               <% } %>
               </tbody>
