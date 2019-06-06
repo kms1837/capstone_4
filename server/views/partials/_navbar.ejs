@@ -14,21 +14,27 @@
         <a class="nav-link count-indicator" href="/admin">학생 상세조회</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link count-indicator" href="/track/1">트랙별 학생조회</a>
+        <a class="nav-link count-indicator" href="/admin/track/1">트랙별 학생조회</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link count-indicator" href="/accept_spec">외부스펙 승인</a>
+        <a class="nav-link count-indicator" href="/admin/accept_spec">외부스펙 승인</a>
       </li>
 
       <% } else { %>
-      <li class="nav-item">
+      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="trackDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
           트랙 조회
         </a>
         
         <div class="dropdown-menu navbar-dropdown" aria-labelledby="trackDropdown">
-          <a class="nav-link count-indicator" href="/user/track_chart">차트 조회</a>
-          <a class="nav-link count-indicator" href="/user/track_score">성적 조회</a>
+          <a class="count-indicator text-center dropdown-item" href="/user/track_chart">
+            <i class="mdi mr-2 mdi-chart-bar"></i>
+            차트 조회
+          </a>
+          <a class="count-indicator text-center dropdown-item" href="/user/track_score">
+            <i class="mdi mr-2 mdi-table"></i>
+            성적 조회
+          </a>
         </div>
       </li>
       <li class="nav-item">

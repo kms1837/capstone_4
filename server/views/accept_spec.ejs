@@ -14,13 +14,13 @@
 </head>
 
 <body>
+  <div class="background-black"></div>
   <div class="background-img"></div>
 
   <div class="container-scroller">
     <% include ./partials/_navbar.ejs %>
     <div class="container-fluid page-body-wrapper">
       <div class="content-wrapper">
-        <% include ./partials/_admin-menu.ejs %>
         <h1 class="grid-margin text-center text-white">승인대기 스펙 목록</h1>
 
         <div class="input-group">
@@ -68,12 +68,16 @@
                           <td><%= specReqList[i].student_id %></td>
                           <td><%= specReqList[i].request_date %></td>
                           <td>
-                            <a target="_blank" class="btn btn-inverse-primary btn-sm" href="/uploads/<%= specReqList[i].path %>">
+                            <a target="_blank" class="btn btn-link btn-sm" href="/uploads/<%= specReqList[i].path %>">
+                              <i class="mdi mdi-file-document"></i>
                               증빙 자료보기
                             </a>
                           </td>
                           <td>
-                            <a class="specDetail btn btn-inverse-primary btn-sm" href="#detail">요청 스펙 상세보기</a>
+                            <a class="specDetail btn btn-success btn-sm" href="#detail">
+                              <i class="mdi mdi-file-document"></i>
+                              요청 스펙 상세보기
+                            </a>
                           </td>
                         </tr>
                       <% } %>
