@@ -1,0 +1,64 @@
+
+
+
+{
+
+ "student":[
+
+    {
+
+      "userid": "16013080",
+
+      "userpw": "1234",
+      
+      "Grade": 3.65,
+      
+      "Coding": 3.59,
+      
+      "Math": 3.67,
+      
+      "Teamwork": 4.5,
+      
+      "Activity": 3.65,
+      
+      "Rank": "Gold",
+      
+      "track1": 3.5,
+      
+      "track2": 4.0,
+
+      "track3": 3.57,
+
+      "track4": 3.5,
+
+      "track5": 3.5,
+
+      "track6": 4.5,
+
+      "track7": 3.0,
+
+      "track8": 3.57,
+
+      "track9": 4.5,
+
+      "track10": 3.25
+
+
+    },
+
+    {
+
+      "name": "이지은",
+
+      "age": "26",
+
+      "userid": "16013000",
+
+      "userpw": "1234"
+
+    }
+
+ ]
+
+}
+
