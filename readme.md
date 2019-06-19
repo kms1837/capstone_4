@@ -10,9 +10,9 @@ $ npm install -g babel-cli
 $ npm install
 $ npm run init
 => server/config/index.js 수정
-$ npm run init
 $ pip install -r .\python\requirements.txt
-$ npm run init
+$ cd ../python
+$ python insert_into_data.py
 ```
 ## 서버실행
 ``` sh
